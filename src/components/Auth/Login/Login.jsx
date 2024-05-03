@@ -31,12 +31,9 @@ const Login = () => {
         localStorage.setItem("token", Jwt_token);
         localStorage.setItem("role", role);
 
-        if (Jwt_token && role === "SUPER_ADMIN") {
+        if (Jwt_token && role === "Admin") {
           console.log(role);
-          navigateTo("/superadmin-dashboard");
-        } else if (Jwt_token && role === "HOTEL_ADMIN") {
-          console.log(role);
-          navigateTo("/hoteladmin-dashboard");
+          navigateTo("/admin-dashboard");
         } else {
           setTimeout(() => {
             navigateTo("/");
