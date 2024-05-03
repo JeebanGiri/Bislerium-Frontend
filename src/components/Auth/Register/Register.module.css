@@ -7,7 +7,7 @@
 }
 .registerimg img {
   width: 400px;
-  margin-top: 100px;
+  margin-top: 150px;
   height: 400px;
 }
 
@@ -26,6 +26,7 @@
 .header h4 {
   font-size: 25px;
   margin-top: 1rem;
+  font-family: sans-serif;
 }
 
 .header p {

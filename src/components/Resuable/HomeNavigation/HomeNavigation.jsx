@@ -5,7 +5,7 @@ import style from "./HomeNavigation.module.css";
 
 const HomeNavigation = () => {
   const navItems = [
-    { path: "/", name: "Hotel & Homes" },
+    { path: "/", name: "Homes" },
     { path: "/register", name: "Register" },
     { path: "/login", name: "Login" },
   ];

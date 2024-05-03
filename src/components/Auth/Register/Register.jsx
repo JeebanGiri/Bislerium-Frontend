@@ -4,7 +4,6 @@ import axios from "axios";
 import { NavLink, useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import RegisterImg from "../../../assets/Images/register.png";
 
 const Register = () => {
   const navigateTo = useNavigate();
@@ -69,7 +68,6 @@ const Register = () => {
                     required
                   />
                 </div>
-
                 <div className={styles["input-email"]}>
                   <label htmlFor="email">Email</label> <br />
                   <input
@@ -118,9 +116,6 @@ const Register = () => {
               </div>
             </div>
           </form>
-        </div>
-        <div className={styles.registerimg}>
-          <img src={RegisterImg} alt="Register Image" />
         </div>
       </div>
     </>

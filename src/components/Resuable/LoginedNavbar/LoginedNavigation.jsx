@@ -4,8 +4,8 @@ import { FaBars, FaTimes } from "react-icons/fa";
 import style from "./LoginedNavigation.module.css";
 import { IoNotifications } from "react-icons/io5";
 import { CgProfile } from "react-icons/cg";
-import Notification from "../../../Notification/Notification";
-import Profile from "../../../Dashboard/Profile";
+import Notification from "../../Notifications/Notification";
+import Profile from "../Profile/Profile";
 import { UseOutsideClick } from "../../../utils/useOutSideClick";
 
 const LoginedNavigation = () => {
@@ -47,7 +47,7 @@ const LoginedNavigation = () => {
       <nav className={style["login-nav"]}>
         <div className={style.loginedNavbarWrapper}>
           <div className={style.logoContainer}>
-          Bislerium Blog Site 
+            <p>Bislerium Blog Site</p>
           </div>
           <div className={style.navListContainer}>
             <ul
