@@ -2,7 +2,7 @@ import styles from "./Profile.module.css";
 import { CgProfile } from "react-icons/cg";
 import { TbBrandBooking } from "react-icons/tb";
 import { useQuery } from "react-query";
-import { userProfile } from "../../constants/Api";
+import { userProfile } from "../../../constants/Api";
 import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
