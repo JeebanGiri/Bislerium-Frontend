@@ -35,7 +35,7 @@ const HomeNavigation = () => {
               <li key={index} className={style.navigationItem}>
                 <NavLink
                   to={item.path}
-                  exact={true}
+                  exact="true"
                   className={`${style.navLink} ${
                     item.path === location.pathname ? style.active : ""
                   }`}

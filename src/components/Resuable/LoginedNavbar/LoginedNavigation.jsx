@@ -62,7 +62,7 @@ const LoginedNavigation = () => {
                   className={style.navLinksss}
                   onClick={handleClick}
                 >
-                  Hotels & Homes
+                  Homes
                 </NavLink>
               </li>
 

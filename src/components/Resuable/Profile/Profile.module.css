@@ -1,53 +1,30 @@
 .profilebox {
-  height: 330px;
-  width: 250px;
+  height: 150px;
+  width: 200px;
+  max-width: (350px-200px);
   border: 1px solid #d9d9d9;
   border-radius: 5px;
   background: white;
   position: absolute;
   top: 70px;
   z-index: 999;
-  right: 70px;
-}
-.profileimage {
-  padding-top: 5px;
-  display: grid;
-  justify-content: center;
-  place-items: center;
-  cursor: pointer;
-}
-
-.avatarPlaceholder {
-  padding-top: 5px;
-  display: grid;
-  font-size: 30px;
-  height: 80px;
-  background-color: #87b3fb;
-  border-radius: 50px;
-  align-items: center;
-  width: 80px;
-  justify-content: center;
-  cursor: pointer;
-}
-
-.profileimage img {
-  border-radius: 50px;
-}
-
-.profileimage p {
-  text-align: center;
+  right: 50px;
 }
 
 .icons {
   font-size: 20px;
   cursor: pointer;
 }
-.booking {
+
+.profilename p {
   gap: 10px;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
-  padding: 0px 0px 0px 30px;
+  justify-content: center;
+  text-align: center;
+  font-size: 17px;
+  padding-top: 10px;
+  font-family: sans-serif;
   cursor: pointer;
 }
 
@@ -59,7 +36,20 @@
   padding: 10px 0px 0px 30px;
   cursor: pointer;
 }
-.booking:hover {
+.emails {
+  gap: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0px 0px 5px 30px;
+  cursor: pointer;
+}
+.emails li {
+  list-style-type: none;
+  font-size: 11px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.profilename:hover {
   color: cornflowerblue;
 }
 .profiles:hover {
@@ -68,7 +58,7 @@
 
 .profiles li {
   list-style-type: none;
-  font-size: 16px;
+  font-size: 14px;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 .booking li {

@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import HomeNavigation from "../Resuable/HomeNavigation/HomeNavigation";
 import LoginedNavigation from "../Resuable/LoginedNavbar/LoginedNavigation";
 
-const Layout = () => {
+const HomeLayout = () => {
   const [isLogin, setIsLogin] = useState(false);
   const role = localStorage.getItem("role");
   useEffect(() => {
@@ -24,4 +24,4 @@ const Layout = () => {
     </>
   );
 };
-export default Layout;
+export default HomeLayout;

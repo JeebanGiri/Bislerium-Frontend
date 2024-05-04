@@ -2,8 +2,8 @@ import { useState } from "react";
 import style from "./Login.module.css";
 import { NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
+import { loginBolgger } from "../../../constants/Api";
 
 const Login = () => {
   const navigateTo = useNavigate();
@@ -21,39 +21,39 @@ const Login = () => {
     e.preventDefault();
     localStorage.setItem("Email", data.email);
 
-    axios
-      .post("http://localhost:8848/auth/login", data)
+    loginBolgger(data)
       .then((response) => {
-        const message = response.data.message;
-        toast.success(message);
-        const Jwt_token = response.data.access_token;
-        const role = response.data.role;
-        localStorage.setItem("token", Jwt_token);
-        localStorage.setItem("role", role);
+        if (response.status === 200) {
+          const message = response.data.message;
+          toast.success(message);
 
-        if (Jwt_token && role === "Admin") {
-          console.log(role);
-          navigateTo("/admin-dashboard");
-        } else {
-          setTimeout(() => {
-            navigateTo("/");
-            window.location.reload();
-          }, 2000);
+          const Jwt_token = response.data.token;
+          const role = response.data.role;
+          console.log(Jwt_token, role, "token and roles");
+          localStorage.setItem("token", Jwt_token);
+          localStorage.setItem("role", role);
+
+          if (Jwt_token && role === "Admin") {
+            console.log(role);
+            navigateTo("/admin-dashboard");
+          } else {
+            setTimeout(() => {
+              navigateTo("/");
+              window.location.reload();
+            }, 2000);
+          }
         }
       })
       .catch((error) => {
-        console.log(error.response);
+        console.log(error, "errors");
         const errorMsg =
-          error.response.data.message || error.response.data.error.message;
+          error.response.data ||
+          error.response.data.error.message ||
+          error.response.data.message;
         if (Array.isArray(errorMsg)) {
           errorMsg.forEach((err) => toast.error(err));
         } else if (errorMsg) {
           toast.error(errorMsg);
-          if (errorMsg === "Please Verify Your Email First") {
-            setTimeout(() => {
-              navigateTo("/email-verification");
-            }, 2000);
-          }
         }
       });
   };
@@ -92,7 +92,6 @@ const Login = () => {
   };
   return (
     <>
-      <ToastContainer />
       <div className={style.loginform}>
         <div className={style["login-page"]}>
           <div className={style["login-container"]}>

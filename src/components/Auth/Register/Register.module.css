@@ -12,9 +12,9 @@
 }
 
 .registercontainer {
-  margin-top: 60px;
+  margin-top: 10px;
   width: 600px;
-  height: 80vh;
+  height: 85vh;
   border-radius: 10px;
   background: white;
   border: 1px solid rgb(224, 200, 154);
@@ -69,16 +69,16 @@
 }
 
 .btn button {
-  height: 45px;
+  height: 40px;
   border-radius: 5px;
   padding-left: 10px;
   font-size: 18px;
-  margin-top: 20px;
-  margin-bottom: 20px;
+  margin: 20px 0px 20px 100px;
   border: 1px solid #006ce4;
-  width: 520px;
+  width: 350px;
   background-color: #006ce4;
   color: #faf5f5;
+  cursor: pointer;
 }
 
 .btn button:hover {
@@ -107,7 +107,9 @@
 .inputitem input::placeholder {
   font-size: 14px;
 }
-
+.input-role input {
+  color: gray;
+}
 .input-label1 {
   display: flex;
   gap: 20px;
@@ -124,7 +126,7 @@
   display: grid;
   justify-content: center;
   text-align: center;
-  margin-top: 5px;
+  margin-top: 0px;
 }
 
 .footer a {
