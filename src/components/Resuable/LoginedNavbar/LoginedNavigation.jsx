@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { FaBars, FaTimes } from "react-icons/fa";
 import style from "./LoginedNavigation.module.css";
 import { IoNotifications } from "react-icons/io5";
@@ -9,6 +9,7 @@ import Profile from "../Profile/Profile";
 import { UseOutsideClick } from "../../../utils/useOutSideClick";
 
 const LoginedNavigation = () => {
+  const navigateTo = useNavigate();
   const [click, setClick] = useState(false);
   const [showProfileBox, setShowProfileBox] = useState(false);
   const [showNotificationBox, setShowNotificationBox] = useState(false);
@@ -17,6 +18,11 @@ const LoginedNavigation = () => {
   const notificationBoxRef = useRef();
   UseOutsideClick(() => setShowProfileBox(false), profileBoxRef);
   UseOutsideClick(() => setShowNotificationBox(false), notificationBoxRef);
+
+  // const handleBlogClick = (e) => {
+  //   e.preventDefault();
+  //   navigateTo("/blog");
+  // };
 
   const handleProfileClick = (e) => {
     // Prevent the click event from propagating to document level
@@ -63,6 +69,16 @@ const LoginedNavigation = () => {
                   onClick={handleClick}
                 >
                   Homes
+                </NavLink>
+              </li>
+              <li key="blog" className={style.navItems}>
+                <NavLink
+                  to="/blog"
+                  exact="true"
+                  className={style.navLinksss}
+                  // onClick={handleBlogClick}
+                >
+                  Blog
                 </NavLink>
               </li>
 

@@ -10,6 +10,7 @@ import ChangePersonaldetails from "./components/Resuable/EditProfile/ChangePerso
 import ChangePassword from "./components/Resuable/EditProfile/ChangePassword";
 import EditProfleLayout from "./components/Layout/EditProfileLayout";
 import PageNotFound from "./utils/PageNotFound";
+import Blog from "./components/Pages/Blog/Blog";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/register" element={<Register />} />
               <Route path="/login" element={<Login />} />
+              <Route path="/blog" element={<Blog />} />
 
               <Route path="/edit-profile" element={<EditProfleLayout />}>
                 <Route path="" element={<ChangePersonaldetails />} />
