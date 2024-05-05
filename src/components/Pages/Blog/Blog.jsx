@@ -1,9 +1,14 @@
 import styles from "./Blog.module.css";
 import { RiAdminFill } from "react-icons/ri";
 import { CiCalendarDate } from "react-icons/ci";
-import { FaEye } from "react-icons/fa";
 import { FcLikePlaceholder } from "react-icons/fc";
 import { IoHeartDislikeOutline } from "react-icons/io5";
+import { FaRegHeart } from "react-icons/fa";
+import { IoMdHeartEmpty } from "react-icons/io";
+import { FaRegComment } from "react-icons/fa6";
+import { FiEye } from "react-icons/fi";
+import { LuHeartOff } from "react-icons/lu";
+import Blogs from "../../../assets/Images/Blog/blog.jpeg";
 
 const Blog = () => {
   const date = new Date();
@@ -25,7 +30,7 @@ const Blog = () => {
     <>
       <div className={styles.blogpage}>
         <div className={styles.header}>
-          <p>Blog Title</p>
+          <p className={styles.titles}>Blog Title</p>
           <div className={styles.results}>
             <span>
               <RiAdminFill /> admin
@@ -34,25 +39,30 @@ const Blog = () => {
               <CiCalendarDate /> {formattedDateTime}
             </span>
             <span>
-              <FaEye /> 8
+              <FiEye /> 8
             </span>
           </div>
           <div className={styles.blogimg}>
-            <img src="" alt="" />
+            <img src={Blogs} alt="Blog" />
           </div>
           <div className={styles.voting}>
             <p>
               <span>
-                <FcLikePlaceholder />
+                <FaRegHeart />
               </span>
-              <span>10</span>
+              <span className={styles["vote-text"]}>10 Like</span>
             </p>
             <p>
               <span>
-                {" "}
-                <IoHeartDislikeOutline />
+                <LuHeartOff />
               </span>
-              <span>2</span>
+              <span className={styles["vote-text"]}>2 DisLike</span>
+            </p>
+            <p>
+              <span>
+                <FaRegComment />
+              </span>
+              <span className={styles["vote-text"]}>2 Comment</span>
             </p>
           </div>
         </div>

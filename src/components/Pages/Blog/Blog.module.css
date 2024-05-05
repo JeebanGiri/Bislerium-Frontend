@@ -1,0 +1,30 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.blogpage {
+  margin-left: 230px;
+  margin-top: 50px;
+  margin: 100px, 0px 0px 200px;
+  font-family: "Roboto";
+}
+.header .titles {
+  font-size: 18px;
+  font-weight: 500;
+}
+.header .results {
+  font-size: 13px;
+  display: flex;
+  gap: 20px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  margin: 10px 0px 10px 0px;
+}
+.header .blogimg img {
+  width: 83%;
+  height: 65vh;
+}
+
+.header .vote-text {
+  font-size: 13px;
+}
