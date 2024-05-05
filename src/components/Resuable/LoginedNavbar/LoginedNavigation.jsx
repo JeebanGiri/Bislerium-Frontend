@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { FaBars, FaTimes } from "react-icons/fa";
 import style from "./LoginedNavigation.module.css";
 import { IoNotifications } from "react-icons/io5";
@@ -9,7 +9,6 @@ import Profile from "../Profile/Profile";
 import { UseOutsideClick } from "../../../utils/useOutSideClick";
 
 const LoginedNavigation = () => {
-  const navigateTo = useNavigate();
   const [click, setClick] = useState(false);
   const [showProfileBox, setShowProfileBox] = useState(false);
   const [showNotificationBox, setShowNotificationBox] = useState(false);
