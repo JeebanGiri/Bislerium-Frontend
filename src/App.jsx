@@ -10,7 +10,8 @@ import ChangePersonaldetails from "./components/Resuable/EditProfile/ChangePerso
 import ChangePassword from "./components/Resuable/EditProfile/ChangePassword";
 import EditProfleLayout from "./components/Layout/EditProfileLayout";
 import PageNotFound from "./utils/PageNotFound";
-import Blog from "./components/Pages/Blog/Blog";
+import ViewBlog from "./components/Pages/Blog/ViewBlog/Blog";
+import CreateBlog from "./components/Pages/Blog/AddBlog/CreateBlog";
 
 function App() {
   return (
@@ -37,7 +38,8 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/register" element={<Register />} />
               <Route path="/login" element={<Login />} />
-              <Route path="/blog" element={<Blog />} />
+              <Route path="/blog" element={<ViewBlog />} />
+              <Route path="/create-blog" element={<CreateBlog />} />
 
               <Route path="/edit-profile" element={<EditProfleLayout />}>
                 <Route path="" element={<ChangePersonaldetails />} />
