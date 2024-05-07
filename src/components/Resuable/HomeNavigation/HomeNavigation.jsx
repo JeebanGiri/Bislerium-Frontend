@@ -5,7 +5,8 @@ import style from "./HomeNavigation.module.css";
 
 const HomeNavigation = () => {
   const navItems = [
-    { path: "/", name: "Hotel & Homes" },
+    { path: "/", name: "Homes" },
+    { path: "/blog", name: "Blog" },
     { path: "/register", name: "Register" },
     { path: "/login", name: "Login" },
   ];
@@ -35,7 +36,7 @@ const HomeNavigation = () => {
               <li key={index} className={style.navigationItem}>
                 <NavLink
                   to={item.path}
-                  exact={true}
+                  exact="true"
                   className={`${style.navLink} ${
                     item.path === location.pathname ? style.active : ""
                   }`}

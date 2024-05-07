@@ -1,0 +1,98 @@
+.profilebox {
+  height: 150px;
+  width: 200px;
+  max-width: (350px-200px);
+  border: 1px solid #d9d9d9;
+  border-radius: 5px;
+  background: white;
+  position: absolute;
+  top: 70px;
+  z-index: 999;
+  right: 50px;
+}
+
+.icons {
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.profilename p {
+  gap: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 17px;
+  padding-top: 10px;
+  font-family: sans-serif;
+  cursor: pointer;
+}
+
+.profiles {
+  gap: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 10px 0px 0px 30px;
+  cursor: pointer;
+}
+.emails {
+  gap: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0px 0px 5px 30px;
+  cursor: pointer;
+}
+.emails li {
+  list-style-type: none;
+  font-size: 11px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.profilename:hover {
+  color: cornflowerblue;
+}
+.profiles:hover {
+  color: cornflowerblue;
+}
+
+.profiles li {
+  list-style-type: none;
+  font-size: 14px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.booking li {
+  list-style-type: none;
+  font-size: 16px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.signout {
+  width: 50%;
+  height: 40px;
+  border-radius: 5px;
+  text-transform: uppercase;
+  color: blue;
+  cursor: pointer;
+  position: relative;
+  margin-top: 30px;
+  margin-left: 70px;
+}
+
+button {
+  border: 1px solid #87b3fb;
+}
+
+.signout:hover {
+  background: #87b3fb;
+  color: white;
+  cursor: pointer;
+}
+
+.profileBoxHidden {
+  display: none;
+}
+
+.profileBoxVisible {
+  display: block;
+}

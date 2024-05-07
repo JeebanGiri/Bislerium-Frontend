@@ -1,13 +1,21 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "http://localhost:8848",
+  baseURL: "https://localhost:7259/api",
 });
 
-export const createUser = (newUser, token) =>
-  api
-    .post("/users", newUser, { headers: { Authorization: `Bearer ${token}` } })
-    .then((res) => res.data);
+// ---------REGISTER BLOGGER-------------
+export const registerBolgger = (newUser) =>
+  api.post("/User/register-user", newUser);
+
+// ---------LOGIN USER-------------
+export const loginBolgger = (newUser) => api.post("/User/login-user", newUser);
+
+// ---------GET PROFILE------------
+export const userProfile = (token) =>
+  api.get("/User/current-user", {
+    headers: { Authorization: `Bearer ${token}` },
+  });
 
 export const updateProfile = (updateProfile, token) =>
   api.patch("/users/current-user", updateProfile, {
@@ -44,12 +52,6 @@ export const searchHotelByAddress = (hotelAddress) =>
 
 // export const searchHotelByAddress = (hotelAddress, hotelRooms) =>
 // api.get(`/hotel/search/address/?address=${hotelAddress}/rooms=${hotelRooms}`);
-
-// ---------GET PROFILE------------
-export const userProfile = (token) =>
-  api.get("/users/current-user", {
-    headers: { Authorization: `Bearer ${token}` },
-  });
 
 // -----------CREATE ROOMS (HOTEL ADMIN) --------------
 export const createRoom = (createRooms, hotel_id, token) =>

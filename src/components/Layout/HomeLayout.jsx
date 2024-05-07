@@ -1,9 +1,9 @@
 import { Outlet } from "react-router-dom";
 import { useEffect, useState } from "react";
-import LoginedNavigation from "../Resuable/LoginedNavbar/LoginedNavigation";
 import HomeNavigation from "../Resuable/HomeNavigation/HomeNavigation";
+import LoginedNavigation from "../Resuable/LoginedNavbar/LoginedNavigation";
 
-const Layout = () => {
+const HomeLayout = () => {
   const [isLogin, setIsLogin] = useState(false);
   const role = localStorage.getItem("role");
   useEffect(() => {
@@ -15,7 +15,7 @@ const Layout = () => {
 
   return (
     <>
-      {isLogin == true && role === "CUSTOMER" ? (
+      {isLogin == true && role === "Blogger" ? (
         <LoginedNavigation />
       ) : (
         <HomeNavigation />
@@ -24,4 +24,4 @@ const Layout = () => {
     </>
   );
 };
-export default Layout;
+export default HomeLayout;
