@@ -26,6 +26,13 @@ function App() {
         />
         <Routes>
           <Route>
+            {/* <Route element={<Layout />}> */}
+            {/* </Route> */}
+            {/* <HomeNavigation /> */}
+            <Route path="" element={<HomeNavigation />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/blog" element={<Blog/>}/>
             <Route element={<HomeLayout />}>
               <Route path="/" element={<Home />} />
               <Route path="/register" element={<Register />} />
