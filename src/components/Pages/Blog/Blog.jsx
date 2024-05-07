@@ -12,11 +12,16 @@ import { useState } from "react";
 
 const Blog = () => {
   const [likeActive, setLikeActive] = useState(false);
+  const [likes, setLikes] = useState(3);
   const [dislikeActive, setDislikeActive] = useState(false);
   const [commentActive, setCommentActive] = useState(false);
 
   const toggleLike = () => {
     setLikeActive(!likeActive);
+
+    if (likeActive) {
+      setLikes(likes + 1);
+    }
   };
 
   const toggleDislike = () => {
@@ -64,9 +69,13 @@ const Blog = () => {
           <div className={styles.voting}>
             <p className={styles["voting-content"]}>
               <span className={styles.icons} onClick={toggleLike}>
-                {likeActive ? <VscHeartFilled /> : <FaRegHeart />}
+                {likeActive ? (
+                  <VscHeartFilled className={styles.filledheart} />
+                ) : (
+                  <FaRegHeart />
+                )}
               </span>
-              <span className={styles["vote-text"]}>10 Like</span>
+              <span className={styles["vote-text"]}>{likes} Like</span>
             </p>
             <p className={styles["voting-content"]}>
               <span className={styles.icons} onClick={toggleDislike}>
