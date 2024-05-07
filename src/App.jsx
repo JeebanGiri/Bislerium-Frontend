@@ -3,6 +3,7 @@ import "./App.css";
 import HomeNavigation from "./components/Resuable/HomeNavigation/HomeNavigation";
 import Register from "./components/Auth/Register/Register";
 import Login from "./components/Auth/Login/Login";
+import Blog from "./components/Page/Blog/Blog";
 function App() {
   return (
     <>
@@ -15,6 +16,7 @@ function App() {
             <Route path="" element={<HomeNavigation />} />
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/blog" element={<Blog/>}/>
           </Route>
         </Routes>
       </div>

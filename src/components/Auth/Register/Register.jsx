@@ -4,6 +4,7 @@ import axios from "axios";
 import { NavLink, useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import RegisterImg from "../../../assets/Images/register.png";
 
 const Register = () => {
   const navigateTo = useNavigate();
@@ -56,9 +57,9 @@ const Register = () => {
           </div>
           <form onSubmit={handleRegister}>
             <div className={styles.inputitem}>
-              <div className={styles["input-label1"]}>
+              <div className={styles["input-label2"]}>
                 <div className={styles["input-name"]}>
-                  <label htmlFor="fullName">Full name</label>
+                  <label htmlFor="fullName">Full name</label> <br />
                   <input
                     type="text"
                     id="fullName"
@@ -68,21 +69,9 @@ const Register = () => {
                     required
                   />
                 </div>
-                <div className={styles["input-phone"]}>
-                  <label htmlFor="phoneNumber">Phone Number</label>
-                  <input
-                    type="tel"
-                    id="phoneNumber"
-                    name="phone_number"
-                    placeholder="+977-9807099754"
-                    onChange={handleInputChange}
-                    required
-                  />
-                </div>
-              </div>
-              <div className={styles["input-label2"]}>
+
                 <div className={styles["input-email"]}>
-                  <label htmlFor="email">Email</label>
+                  <label htmlFor="email">Email</label> <br />
                   <input
                     type="email"
                     id="email"
@@ -94,11 +83,22 @@ const Register = () => {
                 </div>
 
                 <div className={styles["input-password"]}>
-                  <label htmlFor="password">Password</label>
+                  <label htmlFor="password">Password</label> <br />
                   <input
                     type="password"
                     id="password"
                     name="password"
+                    onChange={handleInputChange}
+                    required
+                  />
+                </div>
+                <div className={styles["input-phone"]}>
+                  <label htmlFor="confirm-password">Confirm Password</label>{" "}
+                  <br />
+                  <input
+                    type="password"
+                    id="confirm-password"
+                    name="confirm_password"
                     onChange={handleInputChange}
                     required
                   />
@@ -110,11 +110,17 @@ const Register = () => {
 
               <div className={styles.footer}>
                 <p>
-                  Already have an account? <NavLink to="/login">Log in</NavLink>
+                  Already have an account?{" "}
+                  <NavLink to="/login">
+                    <span className={styles.gologin}>Log In</span>
+                  </NavLink>
                 </p>
               </div>
             </div>
           </form>
+        </div>
+        <div className={styles.registerimg}>
+          <img src={RegisterImg} alt="Register Image" />
         </div>
       </div>
     </>

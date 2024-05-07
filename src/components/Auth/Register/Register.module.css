@@ -1,19 +1,20 @@
 .registerform {
   display: flex;
   justify-content: center;
+  background-color: white;
+  width: 100%;
+  height: 100vh;
+}
+.registerimg img {
+  width: 400px;
+  margin-top: 100px;
+  height: 400px;
 }
 
 .registercontainer {
-  margin-top: -60px;
+  margin-top: 60px;
   width: 600px;
-  height: 80vh;
-  background: white;
-  border: 1px solid rgb(224, 200, 154);
   border-radius: 10px;
-  backdrop-filter: blur(18px) saturate(186%);
-  -webkit-backdrop-filter: blur(18px) saturate(186%);
-  background-color: rgba(255, 255, 255, 0.94);
-  border: 1px solid rgba(209, 213, 219, 0.3);
 }
 
 .header {
@@ -38,14 +39,15 @@
 }
 
 .inputitem label {
-  font-size: 16px;
-  font-family: "poppins";
+  font-size: 15px;
+  font-family: sans-serif;
 }
 
 .inputitem input {
   margin-bottom: 10px;
   padding-left: 20px;
 }
+
 .inputitem input[type="text"],
 .inputitem input[type="tel"],
 .inputitem input[type="email"],
@@ -64,10 +66,12 @@
   font-size: 18px;
   margin-top: 20px;
   margin-bottom: 20px;
-  width: 562px;
+  border: 1px solid #006ce4;
+  width: 520px;
   background-color: #006ce4;
   color: #faf5f5;
 }
+
 .btn button:hover {
   background-color: #0057b8;
   transition: 0.3s ease-out;
@@ -84,13 +88,17 @@
   height: 45px;
   border-radius: 5px;
   font-size: 18px;
-  width: 400px;
+  width: 520px;
+  border: 1px solid #006ce4;
   margin-top: 5px;
 }
-
+.input-label2 input::focus {
+  border: 2px solid #006ce4;
+}
 .inputitem input::placeholder {
   font-size: 14px;
 }
+
 .input-label1 {
   display: flex;
   gap: 20px;
@@ -118,148 +126,16 @@
   margin: 10px 0px 0px 30px;
 }
 
-/* @media screen and (max-width: 1800px) {
-  .registerform {
-    display: flex;
-    justify-content: center;
-    margin-top: 100px;
-  }
-
-
-  .register-container {
-    width: 650px;
-    height: 70vh;
-    background: white;
-    border: 1px solid rgb(224, 200, 154);
-    border-radius: 10px;
-  }
-
-
-  .inputitem {
-    margin-left: 40px;
-  }
-
-  .footer {
-    text-align: center;
-    align-items: center;
-    justify-content: center;
-  }
-
-} */
-
-/* @media screen and (min-width: 1400px) and (max-width: 1600px) {
-  .registerform {
-    display: flex;
-    justify-content: center;
-    margin-top: 100px;
-  }
-
-  .register-container {
-    width: 550px;
-    height: 70vh;
-    justify-content: center;
-    background: white;
-    border: 1px solid rgb(224, 200, 154);
-    border-radius: 10px;
-  }
-
-  .input-label1 {
-    display: flex;
-  }
-
-  .input-label1 input {
-    width: 250px;
-  }
-
-  .input-label2 input {
-    width: 520px;
-  }
-
-  .input-label2 {
-    display: grid;
-  }
-
-  .btn button {
-    width: 520px;
-  }
-
-  .footer {
-    text-align: center;
-    align-items: center;
-    justify-content: center;
-  }
-} */
-
-@media screen and (min-width: 1330px) and (max-width: 1399px) {
-  .registerform {
-    display: flex;
-    justify-content: center;
-    margin-top: 100px;
-  }
-
-  .register-container {
-    width: 450px;
-    height: 70vh;
-    justify-content: center;
-    background: white;
-    border: 1px solid rgb(224, 200, 154);
-    border-radius: 10px;
-  }
-
-  .input-label1 {
-    display: flex;
-    width: 100%;
-  }
-
-  .input-label1 input {
-    width: 250px;
-  }
-
-  .input-label2 input {
-    width: 520px;
-  }
-
-  .input-label2 {
-    display: grid;
-  }
-
-  .btn button {
-    width: 520px;
-  }
-
-  .footer {
-    text-align: center;
-    align-items: center;
-    justify-content: center;
-  }
-}
-
-@media screen and (min-width: 1080px) and (max-width: 1329px) {
-  .registerform {
-    display: flex;
-    justify-content: center;
-    margin-top: 100px;
-  }
-
-  .register-container {
-    width: 450px;
-    height: 70vh;
-    justify-content: center;
-    background: white;
-    border: 1px solid rgb(224, 200, 154);
-    border-radius: 10px;
-  }
-
-  .inputitem {
-    width: 100%;
-  }
+.gologin {
+  color: red;
+  list-style: none;
+  text-decoration: none;
 }
 
 @media screen and (min-width: 729px) and (max-width: 1079px) {
   .registerform {
     display: flex;
     justify-content: center;
-    margin-top: 100px;
   }
 
   .register-container {
@@ -302,7 +178,6 @@
   .registerform {
     display: flex;
     justify-content: center;
-    margin-top: 100px;
   }
 
   .register-container {
@@ -346,7 +221,6 @@
     display: flex;
     gap: 0px;
     justify-content: center;
-    margin-top: 100px;
   }
 
   .register-container {
