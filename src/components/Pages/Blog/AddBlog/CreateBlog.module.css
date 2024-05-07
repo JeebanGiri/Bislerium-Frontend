@@ -1,0 +1,67 @@
+.create-blog {
+  margin: 50px 220px 0px 230px;
+  font-family: "Roboto";
+}
+
+.blog-article {
+  border: 1px solid gainsboro;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+.create-blog .header {
+  text-align: center;
+  padding: 10px;
+  background-color: gainsboro;
+}
+.blog-content {
+  display: grid;
+  padding: 20px;
+  gap: 20px;
+  font-family: "Roboto";
+}
+.blog-content .title-input input {
+  width: 100%;
+  height: 35px;
+  border: 1px solid springgreen;
+  border-radius: 3px;
+  padding-left: 5px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.blog-content .textarea-input textarea {
+  border: 1px solid springgreen;
+  width: 100%;
+  border-radius: 3px;
+  padding-left: 5px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.img-input input[type="file"] {
+  width: 100%;
+  height: 40px;
+  line-height: 30px;
+  border: 1px solid springgreen;
+  padding-left: 5px;
+  border-radius: 3px;
+  line-height: 35px;
+}
+.blog-content .footer-btn {
+  display: flex;
+  gap: 20px;
+}
+.footer-btn button:first-child {
+  color: white;
+  background-color: #3cc23c;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.footer-btn button:nth-child(2) {
+  color: white;
+  background-color: red;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}

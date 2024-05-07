@@ -5,7 +5,7 @@ import { FaRegHeart } from "react-icons/fa";
 import { FaRegComment } from "react-icons/fa6";
 import { FiEye } from "react-icons/fi";
 import { LuHeartOff } from "react-icons/lu";
-import Blogs from "../../../assets/Images/Blog/blog.jpeg";
+import Blogs from "../../../../assets/Images/Blog/blog.jpeg";
 import { VscHeartFilled } from "react-icons/vsc";
 import { IoIosHeartDislike } from "react-icons/io";
 import { useState } from "react";
