@@ -5,14 +5,20 @@ import { userProfile } from "../../../constants/Api";
 import { useNavigate } from "react-router-dom";
 import { LuLogOut } from "react-icons/lu";
 import { IoMailOutline } from "react-icons/io5";
+import { TbBrandBlogger } from "react-icons/tb";
 
 const Profile = () => {
   const navigateTo = useNavigate();
   const token = localStorage.getItem("token");
+  const role = localStorage.getItem("role");
 
   const handleEditProfile = (e) => {
     e.preventDefault();
     navigateTo("/edit-profile");
+  };
+
+  const handleBlogPage = () => {
+    navigateTo("/my-blogs");
   };
 
   const handleLogout = () => {
@@ -39,6 +45,14 @@ const Profile = () => {
           <span className={styles.profiles}>
             <CgProfile className={styles.icons} />
             <li onClick={handleEditProfile}>My Profile</li>
+          </span>
+          <span className={styles.profiles}>
+            {role === "Blogger" ? (
+              <>
+                <TbBrandBlogger className={styles.icons} />
+                <li onClick={handleBlogPage}>My Blogs</li>
+              </>
+            ) : null}
           </span>
           <span className={styles.profiles} onClick={handleLogout}>
             <LuLogOut className={styles.icons} />

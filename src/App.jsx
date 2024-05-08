@@ -12,9 +12,8 @@ import EditProfleLayout from "./components/Layout/EditProfileLayout";
 import PageNotFound from "./utils/PageNotFound";
 import ViewBlog from "./components/Pages/Blog/ViewBlog/Blog";
 import CreateBlog from "./components/Pages/Blog/AddBlog/CreateBlog";
-import HomeNavigation from "./components/Resuable/HomeNavigation/HomeNavigation";
-import Blog from "./components/Pages/Blog/ViewBlog/Blog";
 import LoginPopup from "./components/Auth/LoginPopup/LoginPopup";
+import ViewBloggerBlog from "./components/Pages/Blog/ViewBloggerBlog/ViewBloggerBlog";
 
 function App() {
   return (
@@ -35,6 +34,7 @@ function App() {
               <Route path="/register" element={<Register />} />
               <Route path="/login" element={<Login />} />
               <Route path="/blog" element={<ViewBlog />} />
+              <Route path="/my-blogs" element={<ViewBloggerBlog />} />
               <Route path="/login-direct" element={<LoginPopup />} />
               <Route path="/create-blog" element={<CreateBlog />} />
 
