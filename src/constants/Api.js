@@ -18,7 +18,7 @@ export const userProfile = (token) =>
   });
 
 export const updateProfile = (updateProfile, token) =>
-  api.patch("/users/current-user", updateProfile, {
+  api.patch("/Users/current-user", updateProfile, {
     headers: { Authorization: `Bearer ${token}` },
   });
 
@@ -28,8 +28,8 @@ export const changePassword = (updatePassword, token) =>
   });
 
 // create hotel
-export const createHotel = async (newHotel, token) =>
-  await api.post("/hoteladmin/register-hotel", newHotel, {
+export const createBlog = async (newBlog, token) =>
+  await api.post("/Blog/create-blog", newBlog, {
     headers: { Authorization: `Bearer ${token}` },
   });
 
