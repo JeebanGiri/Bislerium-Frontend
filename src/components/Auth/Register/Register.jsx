@@ -108,7 +108,7 @@ const Register = () => {
       <div className={styles.registerform}>
         <div className={styles.registercontainer}>
           <div className={styles.header}>
-            <h4>Register</h4>
+            <p>Register</p>
             <p>Enter your credentials to create an account</p>
           </div>
           <form onSubmit={handleRegister}>
@@ -122,7 +122,6 @@ const Register = () => {
                     name="fullName"
                     onChange={handleInputChange}
                     placeholder="John Doe"
-                    // required
                   />
                 </div>
                 <div className={styles["input-email"]}>
@@ -185,9 +184,6 @@ const Register = () => {
               </div>
             </div>
           </form>
-        </div>
-        <div className={styles.registerimg}>
-          <img src={RegisterImg} alt="Register Image" />
         </div>
       </div>
     </>

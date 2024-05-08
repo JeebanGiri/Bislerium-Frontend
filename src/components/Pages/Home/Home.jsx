@@ -1,6 +1,9 @@
 import styles from "./Home.module.css";
 import RegisterImg from "../../../assets/Images/Blog/blog.jpeg";
 import { useNavigate } from "react-router-dom";
+import { FaRegEdit } from "react-icons/fa";
+import { BsCalendarDate } from "react-icons/bs";
+
 const Home = () => {
   const navigateTo = useNavigate();
   const toggleCreateBlog = () => {
@@ -17,39 +20,46 @@ const Home = () => {
             </button>
           </span>
         </div>
-        {/* <header className={styles.header}>
-          <h2>Welcome to Our Blog</h2>
-        </header> */}
         <div className={styles.landingpage}>
-          <section className={styles.blog} id="blog">
-            <div className="container">
-              <div className={styles.title}>
-                <h2>Latest Blog</h2>
-                <p>recent blogs about art & design</p>
+          <div className={styles["box-frame"]}>
+            <div className={styles["blog-box"]}>
+              <div className={styles["img-side"]}>
+                <img src={RegisterImg} alt="Blog 1" />
               </div>
-              <div className={styles["blog-content"]}>
-                <div className={styles["blog-item"]}>
-                  <div className={styles["blog-img"]}>
-                    <img
-                      src={RegisterImg}
-                      alt=""
-                      style={{ height: "400px", width: "380px" }}
-                    />
-                  </div>
-
-                  <div className={styles["blog-text"]}>
-                    <span>20 January, 2020</span>
-                    <h2>Lorem ipsum, dolor sit amet consectetur adipisicing</h2>
-                    <p>
-                      Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                      Omnis libero quas ipsum laudantium nihil! Quaerat.
-                    </p>
-                    <a href="#">Read More</a>
-                  </div>
+              <div className={styles["content-side"]}>
+                <div className={styles.blogtitle}>
+                  <p>Title of the Blog where it arise?</p>
                 </div>
+                <span className={styles.blogdetails}>
+                  <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Totam a, iure quidem repudiandae tempora blanditiis
+                    mollitia! Dolor impedit fugit ipsum?
+                  </p>
+                  <button>Continue Reading</button>
+                </span>
+                <span className={styles["footer-side"]}>
+                  <span>
+                    <FaRegEdit /> author name
+                  </span>
+                  <span>
+                    <BsCalendarDate /> date
+                  </span>
+                </span>
               </div>
             </div>
-          </section>
+          </div>
+          <div className={styles["recent-blog"]}>
+            <div>
+              <p>Recent Post</p>
+              <p className={styles.bolgss}>
+                <li>This is blog1</li>
+                <li>This is blog2</li>
+                <li>This is blog3</li>
+                <li>This is blog4</li>
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </>

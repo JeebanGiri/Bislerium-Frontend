@@ -9,9 +9,11 @@ import Blogs from "../../../../assets/Images/Blog/blog.jpeg";
 import { VscHeartFilled } from "react-icons/vsc";
 import { IoIosHeartDislike } from "react-icons/io";
 import { useState } from "react";
+import LoginPopup from "../../../Auth/LoginPopup/LoginPopup";
 
 const Blog = () => {
   const [likeActive, setLikeActive] = useState(false);
+  const [openLogin, setOpenLogin] = useState(false);
   const [likes, setLikes] = useState(3);
   const [dislikeActive, setDislikeActive] = useState(false);
   const [commentActive, setCommentActive] = useState(false);
@@ -30,6 +32,10 @@ const Blog = () => {
 
   const toggleComment = () => {
     setCommentActive(!commentActive);
+  };
+
+  const handleLoginPopup = () => {
+    setOpenLogin(!openLogin);
   };
 
   const date = new Date();
@@ -68,13 +74,14 @@ const Blog = () => {
           </div>
           <div className={styles.voting}>
             <p className={styles["voting-content"]}>
-              <span className={styles.icons} onClick={toggleLike}>
+              <span className={styles.icons} onClick={handleLoginPopup}>
                 {likeActive ? (
                   <VscHeartFilled className={styles.filledheart} />
                 ) : (
                   <FaRegHeart />
                 )}
               </span>
+              {openLogin ? <LoginPopup /> : null}
               <span className={styles["vote-text"]}>{likes} Like</span>
             </p>
             <p className={styles["voting-content"]}>
@@ -109,6 +116,7 @@ const Blog = () => {
             </p>
             <p>No comments found</p>
             <p className={styles.commentbox}>leave a comment</p>
+            <hr />
             <label htmlFor="comment" className={styles.commentlabel}>
               Message
             </label>
@@ -117,24 +125,21 @@ const Blog = () => {
               id="comment"
               className={styles.commentTextArea}
               rows={3}
-              cols={50}
             ></textarea>
             <div className={styles["comment-btn"]}>
               <button type="submit">Submit</button>
             </div>
           </div>
           <div className={styles["recent-blog"]}>
-            <p className={styles.bloglines}>
-              <hr className={styles.hrStyle} />
-            </p>
-            <p>Recent Blog</p>
-            <p className={styles.bloglines}>
-              <hr />
-            </p>
-            <li>This is blog1</li>
-            <li>This is blog2</li>
-            <li>This is blog3</li>
-            <li>This is blog4</li>
+            <div>
+              <p>Recent Post</p>
+              <p className={styles.bolgss}>
+                <li>This is blog1</li>
+                <li>This is blog2</li>
+                <li>This is blog3</li>
+                <li>This is blog4</li>
+              </p>
+            </div>
           </div>
         </div>
       </div>
