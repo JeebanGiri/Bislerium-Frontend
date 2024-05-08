@@ -6,9 +6,14 @@ import { BsCalendarDate } from "react-icons/bs";
 
 const Home = () => {
   const navigateTo = useNavigate();
+
+  const token = localStorage.getItem("token");
+  console.log(token);
+
   const toggleCreateBlog = () => {
     navigateTo("/create-blog");
   };
+
   return (
     <>
       <div className={styles["blog-landing"]}>
