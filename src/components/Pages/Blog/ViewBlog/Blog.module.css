@@ -4,8 +4,7 @@
   box-sizing: border-box;
 }
 .blogpage {
-  margin-left: 230px;
-  margin-top: 50px;
+  margin: 50px 100px 0px 230px;
   font-family: "Roboto";
 }
 .header .titles {
@@ -16,15 +15,18 @@
   font-size: 20px;
 }
 .header .results {
-  font-size: 13px;
+  font-size: 12px;
   display: flex;
   gap: 20px;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-family: "Roboto";
   margin: 10px 0px 10px 0px;
 }
+.header .blogimg {
+  width: 100%;
+}
 .header .blogimg img {
-  width: 83%;
-  height: 65vh;
+  width: 82%;
+  height: 55vh;
 }
 .voting-content {
   display: flex;
@@ -32,21 +34,22 @@
 }
 
 .header .vote-text {
-  font-size: 13px;
+  font-size: 11px;
 }
 .header .voting {
   display: flex;
   gap: 20px;
   margin-top: 5px;
 }
-
 .header .blog-content {
-  margin-right: 150px;
+  margin-right: 200px;
+  text-align: justify;
   margin-top: 10px;
 }
+
 .blog-fotter {
   display: flex;
-  gap: 150px;
+  gap: 70px;
   margin-top: 30px;
 }
 .blog-fotter li {
@@ -55,6 +58,7 @@
 .comment-section {
   display: grid;
   gap: 10px;
+  width: 45%;
 }
 
 .comment-section p:first-child {
@@ -67,19 +71,38 @@
     "Lucida Sans", Arial, sans-serif;
   font-size: 11px;
 }
-.recent-blog p:first-child {
-  font-size: 16px;
-  font-family: sans-serif;
-  font-weight: bold;
-}
+
 .recent-blog {
   display: grid;
-  gap: 10px;
+  border: 1px solid rgb(197, 194, 194);
+  border-radius: 3px;
+  padding: 10px;
+  width: 285px;
+  max-height: 500px;
 }
-.recent-blog p:nth-child(2) {
+
+.recent-blog p:first-child {
+  font-size: 13px;
+  height: 30px;
   font-weight: 500;
-  font-size: 14px;
+  width: 240px;
+  background-color: #d1cfcf;
+  padding: 5px;
+  border-radius: 5px;
 }
+
+.recent-blog p:nth-child(2) {
+  font-size: 15px;
+  line-height: 20px;
+}
+
+.recent-blog p:nth-child(2) {
+  margin-left: 20px;
+}
+.recent-blog .bolgss {
+  padding-top: 10px;
+}
+
 .comment-section .commentlabel {
   font-size: 13px;
   font-weight: 500;
@@ -87,11 +110,9 @@
 .commentlines hr {
   color: gray;
 }
-.bloglines hr {
-  border: 1px solid #f3f2f2;
-}
 .comment-section textarea {
   background-color: #dfdbdb;
+  width: 100%;
   border-radius: 5px;
 }
 .commentTextArea {
@@ -105,7 +126,7 @@
 .comment-btn button {
   background-color: #007bff;
   color: white;
-  padding: 10px 20px;
+  padding: 7px 15px;
   border: none;
   border-radius: 5px;
   cursor: pointer;

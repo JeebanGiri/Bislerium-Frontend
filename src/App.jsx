@@ -12,6 +12,9 @@ import EditProfleLayout from "./components/Layout/EditProfileLayout";
 import PageNotFound from "./utils/PageNotFound";
 import ViewBlog from "./components/Pages/Blog/ViewBlog/Blog";
 import CreateBlog from "./components/Pages/Blog/AddBlog/CreateBlog";
+import HomeNavigation from "./components/Resuable/HomeNavigation/HomeNavigation";
+import Blog from "./components/Pages/Blog/ViewBlog/Blog";
+import LoginPopup from "./components/Auth/LoginPopup/LoginPopup";
 
 function App() {
   return (
@@ -27,18 +30,12 @@ function App() {
         />
         <Routes>
           <Route>
-            {/* <Route element={<Layout />}> */}
-            {/* </Route> */}
-            {/* <HomeNavigation /> */}
-            <Route path="" element={<HomeNavigation />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/blog" element={<Blog/>}/>
             <Route element={<HomeLayout />}>
               <Route path="/" element={<Home />} />
               <Route path="/register" element={<Register />} />
               <Route path="/login" element={<Login />} />
               <Route path="/blog" element={<ViewBlog />} />
+              <Route path="/login-direct" element={<LoginPopup />} />
               <Route path="/create-blog" element={<CreateBlog />} />
 
               <Route path="/edit-profile" element={<EditProfleLayout />}>

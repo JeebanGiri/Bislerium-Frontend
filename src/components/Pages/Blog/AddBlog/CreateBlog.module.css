@@ -1,6 +1,12 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 .create-blog {
-  margin: 50px 220px 0px 230px;
   font-family: "Roboto";
+  margin: 50px 220px 0px 230px;
 }
 
 .blog-article {
