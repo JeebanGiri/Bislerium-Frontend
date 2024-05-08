@@ -1,7 +1,7 @@
 .profilebox {
-  height: 150px;
+  height: 160px;
   width: 200px;
-  max-width: (350px-200px);
+  max-width: 350px;
   border: 1px solid #d9d9d9;
   border-radius: 5px;
   background: white;

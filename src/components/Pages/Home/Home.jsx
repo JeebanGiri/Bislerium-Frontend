@@ -14,6 +14,11 @@ const Home = () => {
     navigateTo("/create-blog");
   };
 
+  const goToBlog = (e) => {
+    e.preventDefault();
+    navigateTo("/blog");
+  };
+
   return (
     <>
       <div className={styles["blog-landing"]}>
@@ -41,7 +46,7 @@ const Home = () => {
                     Totam a, iure quidem repudiandae tempora blanditiis
                     mollitia! Dolor impedit fugit ipsum?
                   </p>
-                  <button>Continue Reading</button>
+                  <button onClick={goToBlog}>Continue Reading</button>
                 </span>
                 <span className={styles["footer-side"]}>
                   <span>
