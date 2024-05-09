@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { LuLogOut } from "react-icons/lu";
 import { IoMailOutline } from "react-icons/io5";
 import { TbBrandBlogger } from "react-icons/tb";
+import Logout from "../../Auth/Logout";
 
 const Profile = () => {
   const navigateTo = useNavigate();
@@ -22,9 +23,7 @@ const Profile = () => {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem("token");
-    navigateTo("/");
-    window.location.reload();
+    return <Logout />;
   };
 
   const { data } = useQuery("get-profile", () => userProfile(token));

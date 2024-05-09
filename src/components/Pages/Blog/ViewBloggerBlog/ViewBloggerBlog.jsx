@@ -78,6 +78,7 @@ const ViewBloggerBlog = () => {
   const [top, setTop] = useState("topLeft");
   const [bottom, setBottom] = useState("bottomRight");
   const [centerbottom, setCenterBottom] = useState("bottomCenter");
+  
 
   return (
     <>

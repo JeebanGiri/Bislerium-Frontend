@@ -23,7 +23,7 @@ export const updateProfile = (updateProfile, token) =>
   });
 
 export const changePassword = (updatePassword, token) =>
-  api.patch("/users/change-password", updatePassword, {
+  api.put("/User/change-password", updatePassword, {
     headers: { Authorization: `Bearer ${token}` },
   });
 

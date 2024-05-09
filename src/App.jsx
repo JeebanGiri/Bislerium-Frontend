@@ -14,6 +14,8 @@ import ViewBlog from "./components/Pages/Blog/ViewBlog/Blog";
 import CreateBlog from "./components/Pages/Blog/AddBlog/CreateBlog";
 import LoginPopup from "./components/Auth/LoginPopup/LoginPopup";
 import ViewBloggerBlog from "./components/Pages/Blog/ViewBloggerBlog/ViewBloggerBlog";
+import AdminDashboard from "./components/Dashboard/AdminDashboard/AdminDashboard";
+import AdminLayout from "./components/Layout/Admin/AdminLayout";
 
 function App() {
   return (
@@ -42,6 +44,11 @@ function App() {
                 <Route path="" element={<ChangePersonaldetails />} />
                 <Route path="change-password" element={<ChangePassword />} />
               </Route>
+
+              <Route path="/admin-dashboard" element={<AdminLayout />}>
+                <Route index element={<AdminDashboard />} />
+              </Route>
+
               <Route path="*" element={<PageNotFound />} />
             </Route>
           </Route>
