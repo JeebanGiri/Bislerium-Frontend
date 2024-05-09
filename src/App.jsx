@@ -18,6 +18,8 @@ import AdminDashboard from "./components/Dashboard/AdminDashboard/AdminDashboard
 import AdminLayout from "./components/Layout/Admin/AdminLayout";
 import BlogHistory from "./components/Dashboard/AdminDashboard/BlogHistory/BlogHistory";
 import Blogs from "./components/Dashboard/AdminDashboard/Blogs/Blogs";
+import ViewSubAdmin from "./components/Dashboard/AdminDashboard/ViewSubAdmin/ViewSubAdmin";
+import AddAdmin from "./components/Dashboard/AdminDashboard/AddAdmin/AddAdmin";
 
 function App() {
   return (
@@ -50,6 +52,8 @@ function App() {
               <Route path="/admin-dashboard" element={<AdminLayout />}>
                 <Route path="" element={<AdminDashboard />} />
                 <Route path="blogs" element={<Blogs />} />
+                {/* <Route path="sub-admin" element={<ViewSubAdmin />} /> */}
+                <Route path="sub-admin" element={<AddAdmin />} />
                 <Route path="blog-history" element={<BlogHistory />} />
               </Route>
 

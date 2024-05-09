@@ -5,19 +5,11 @@ import { MdDelete } from "react-icons/md";
 const ViewSubAdmin = () => {
   return (
     <>
-      <h1>View SubAdmin</h1>
-      <br />
-      <div className="add-button">
-        <button type="add" className={style.submitButton}>
-          Add
-        </button>
-      </div>
-
       <div className={style["subadmin-table"]}>
         <table>
           <thead>
             <tr>
-              <th>#</th>
+              <th>S.N.</th>
               <th>Username</th>
               <th>Email</th>
               <th>Posting Date</th>
