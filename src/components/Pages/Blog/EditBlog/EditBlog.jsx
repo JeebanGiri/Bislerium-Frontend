@@ -1,11 +1,11 @@
 import { useState } from "react";
-import styles from "./CreateBlog.module.css";
+import styles from "../CreateBlog.module.css";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { createBlog } from "../../../../constants/Api";
 import { useNavigate } from "react-router-dom";
 
-const CreateBlog = () => {
+const EditBlog = () => {
   const navigateTo = useNavigate();
   const [formData, setFormData] = useState({
     title: "",
@@ -14,32 +14,6 @@ const CreateBlog = () => {
   });
 
   const handleChange = (event) => {
-    // const { name, files, value } = event.target;
-
-    // // For handling the multiple files sent in the image input
-    // if (files) {
-    //   if (name === "image") {
-    //     const newImages = [];
-    //     for (let i = 0; i < files.length; i++) {
-    //       newImages.push(files[i]);
-    //     }
-    //     setFormData({
-    //       ...formData,
-    //       image: newImages,
-    //     });
-    //   } else {
-    //     setFormData({
-    //       ...formData,
-    //       [name]: files[0],
-    //     });
-    //   }
-    // } else {
-    //   setFormData({
-    //     ...formData,
-    //     [name]: value,
-    //   });
-    // }
-
     const { name, files, value } = event.target;
 
     if (files) {
@@ -169,4 +143,4 @@ const CreateBlog = () => {
     </>
   );
 };
-export default CreateBlog;
+export default EditBlog;

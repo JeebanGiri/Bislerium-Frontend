@@ -1,4 +1,8 @@
-.container .title {
+.blogger-blogs {
+  margin: 50px auto;
+  width: 100%;
+}
+.title {
   font-size: 24px;
   font-weight: 400;
   color: gray;

@@ -17,13 +17,18 @@ export const ChangePassword = () => {
     const token = localStorage.getItem("token");
     changePassword(data, token)
       .then((response) => {
+        console.log(response, "Res");
         const message = response.data.message;
         toast.success(message);
       })
       .catch((error) => {
+        console.log(error, "err");
         console.log(error, "change error");
         const errorMsg =
-          error.response.data.message || error.response.data.error.message;
+          error.response.data.OldPassword ||
+          error.response.data.Password ||
+          error.response.data.ConfirmPassword ||
+          error.response.data.message;
         if (Array.isArray(errorMsg)) {
           errorMsg.forEach((err) => toast.error(err));
         } else if (errorMsg) {

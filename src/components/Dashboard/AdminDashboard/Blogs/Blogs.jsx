@@ -1,32 +1,45 @@
 import { useState } from "react";
-import styles from "./ViewBloggerBlog.module.css";
-import { Button, Popconfirm, Space, Table, Tag } from "antd";
+import styles from "./Blogs.module.css";
+import { Button, Popconfirm, Space, Table } from "antd";
 import { QuestionCircleOutlined } from "@ant-design/icons";
 import { useQuery, useQueryClient } from "react-query";
-import { deleteBlog, getBloggerBlog } from "../../../../constants/Api";
+import { deleteBloggerBlog, getAllBlog } from "../../../../constants/Api";
 
-const ViewBloggerBlog = () => {
+const Blogs = () => {
+  const date = new Date();
+
+  // Format options for displaying the date and time
+  const options = {
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+    hour: "numeric",
+    minute: "2-digit",
+    hour12: true,
+  };
+
+  // Get the formatted date and time string
+  const formattedDateTime = date.toLocaleString("en-US", options);
   const [top, setTop] = useState("topLeft");
   const [bottom, setBottom] = useState("bottomRight");
 
   const queryClient = useQueryClient();
+
   const token = localStorage.getItem("token");
 
-  //--------FETCH HOTEL INFO-------------
-  const { data: BlogInfo } = useQuery("blog-details", () =>
-    getBloggerBlog(token)
-  );
+  //--------FETCH Blogger INFO-------------
+  const { data: BlogInfo } = useQuery("blog-details", () => getAllBlog(token));
 
-  console.log(BlogInfo, "hotelinfo");
+  console.log(BlogInfo, "bloginfo");
 
   const blogId = BlogInfo?.data[0]?.id;
-  console.log(blogId, "hotelid");
+  console.log(blogId, "Blogid");
 
   const tableData = BlogInfo?.data;
 
   const handleDeleteBlog = async (blogId) => {
     try {
-      await deleteBlog(blogId, token);
+      await deleteBloggerBlog(blogId, token);
       queryClient.invalidateQueries("blog-details");
 
       // Optimistically update the frontend state by removing the deleted room
@@ -54,14 +67,20 @@ const ViewBloggerBlog = () => {
       key: "title",
     },
     {
-      title: "Content",
-      dataIndex: "content",
-      key: "content",
-    },
-    {
       title: "Create Date",
       dataIndex: "createdDate",
       key: "createdDate",
+      render: (createdDate) => {
+        const formattedDate = new Date(createdDate).toLocaleString("en-US", {
+          month: "long",
+          day: "numeric",
+          year: "numeric",
+          hour: "numeric",
+          minute: "2-digit",
+          hour12: true,
+        });
+        return <span>{formattedDate}</span>;
+      },
     },
     {
       title: "Image",
@@ -105,10 +124,12 @@ const ViewBloggerBlog = () => {
       ),
     },
   ];
-
   return (
     <>
       <div className={styles["blogger-blogs"]}>
+        <div className={styles.title}>
+          <h4>Blogs Lists</h4>
+        </div>
         <div>
           <Table
             columns={columns}
@@ -117,10 +138,12 @@ const ViewBloggerBlog = () => {
             }}
             dataSource={tableData}
             rowKey={"id"}
+            className={styles.customTable}
+            scroll={{ y: 240 }}
           />
         </div>
       </div>
     </>
   );
 };
-export default ViewBloggerBlog;
+export default Blogs;

@@ -1,0 +1,57 @@
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+th {
+  font-size: 14px;
+  border: 1px solid #ddd;
+  background-color: #003b95;
+  color: white;
+  padding: 8px;
+  font-family: "Roboto";
+}
+td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  font-size: 14px;
+  font-family: "Roboto";
+  text-align: center;
+}
+th {
+  text-align: center;
+}
+
+h1 {
+  font-family: "Roboto";
+  color: rgb(112, 161, 205);
+  font-weight: 400;
+  font-size: 22px;
+}
+
+.submitButton {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.subadmin-table {
+  justify-content: center;
+  left: 50%;
+}
+
+.icons {
+  display: flex;
+  gap: 10px;
+  cursor: pointer;
+  justify-content: center;
+}
+
+.icons span:first-child {
+  color: #4caf50;
+}
+.icons span:nth-child(2) {
+  color: red;
+}

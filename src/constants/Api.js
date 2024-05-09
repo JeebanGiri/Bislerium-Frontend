@@ -8,6 +8,10 @@ const api = axios.create({
 export const registerBolgger = (newUser) =>
   api.post("/User/register-user", newUser);
 
+// ---------REGISTER BLOGGER-------------
+export const registerSubAdmin = (newUser) =>
+  api.post("/User/register-user", newUser);
+
 // ---------LOGIN USER-------------
 export const loginBolgger = (newUser) => api.post("/User/login-user", newUser);
 
@@ -17,8 +21,13 @@ export const userProfile = (token) =>
     headers: { Authorization: `Bearer ${token}` },
   });
 
+export const getSubAdmin = (token) =>
+  api.get("User/get-users", {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+
 export const updateProfile = (updateProfile, token) =>
-  api.patch("/Users/current-user", updateProfile, {
+  api.put("/Users/current-user", updateProfile, {
     headers: { Authorization: `Bearer ${token}` },
   });
 
@@ -29,7 +38,36 @@ export const changePassword = (updatePassword, token) =>
 
 // create hotel
 export const createBlog = async (newBlog, token) =>
-  await api.post("/Blog/create-blog", newBlog, {
+  api.post("/Blog/create-blog", newBlog, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+
+// get blogger blog
+export const getBloggerBlog = async (token) =>
+  api.get("/Blog/get-blog", {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+
+// ----------DELETE THE Blog ----------------
+export const deleteBlog = (blogId, token) =>
+  api.delete(`/Blog/delete-blog/${blogId}`, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+
+export const deleteBloggerBlog = (blogId, token) =>
+  api.delete(`/Blog/delete-blog/${blogId}`, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+
+// -----GET ALL BLOG-----------------
+export const getAllBlog = async (token) =>
+  api.get("/Blog/get-all-blog", {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+
+// ----------DELETE THE Sub Admin ----------------
+export const deleteSubAdmin = (adminId, token) =>
+  api.delete(`/User/delete-user/${adminId}`, {
     headers: { Authorization: `Bearer ${token}` },
   });
 
