@@ -76,13 +76,6 @@ const CreateBlog = () => {
     //   }
     // });
 
-    // data.append("title", formData.title);
-    // data.append("content", formData.content);
-    // if (formData.image) {
-    //   data.append("image", formData.image);
-    //   console.log(formData.image);
-    // }
-
     const data = new FormData();
 
     // Append title and content
