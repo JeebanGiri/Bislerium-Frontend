@@ -21,8 +21,13 @@ export const userProfile = (token) =>
     headers: { Authorization: `Bearer ${token}` },
   });
 
+export const getSubAdmin = (token) =>
+  api.get("User/get-users", {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+
 export const updateProfile = (updateProfile, token) =>
-  api.patch("/Users/current-user", updateProfile, {
+  api.put("/Users/current-user", updateProfile, {
     headers: { Authorization: `Bearer ${token}` },
   });
 
@@ -57,6 +62,12 @@ export const deleteBloggerBlog = (blogId, token) =>
 // -----GET ALL BLOG-----------------
 export const getAllBlog = async (token) =>
   api.get("/Blog/get-all-blog", {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+
+// ----------DELETE THE Sub Admin ----------------
+export const deleteSubAdmin = (adminId, token) =>
+  api.delete(`/User/delete-user/${adminId}`, {
     headers: { Authorization: `Bearer ${token}` },
   });
 

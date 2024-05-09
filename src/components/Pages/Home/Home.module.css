@@ -36,7 +36,8 @@
   text-align: center;
 }
 .landingpage {
-  display: flex;
+  display: grid;
+  grid-row: auto;
   gap: 30px;
   padding-top: 10px;
 }
@@ -45,11 +46,16 @@
   width: 65%;
   border: 1px solid rgb(197, 194, 194);
   border-radius: 3px;
+  display: flex;
   padding: 5px;
+  width: 910px;
 }
+
 .box-frame .blog-box {
   display: flex;
   padding: 10px;
+  /* width: 600px; */
+  width: 900px;
 }
 .blog-box .img-side img {
   width: 200px;
@@ -78,6 +84,7 @@
   font-size: 13px;
   background-color: #ffffffe5;
   cursor: pointer;
+  margin-top: 5px;
 }
 .content-side .footer-side {
   display: flex;
@@ -116,4 +123,22 @@
 }
 .recent-blog .bolgss {
   padding-top: 10px;
+}
+
+.details {
+  --max-lines: 5;
+  display: hidden;
+  -webkit-box-orient: horizontal;
+  -webkit-line-clamp: var(--max-lines);
+}
+
+.content-side {
+  max-height: 200px;
+  overflow: hidden;
+}
+.content-side p {
+  white-space: nowrap;
+  -webkit-line-clamp: var(--max-lines);
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

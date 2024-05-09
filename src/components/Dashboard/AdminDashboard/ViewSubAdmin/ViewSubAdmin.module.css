@@ -45,6 +45,7 @@ h1 {
 .icons {
   display: flex;
   gap: 10px;
+  cursor: pointer;
   justify-content: center;
 }
 

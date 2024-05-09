@@ -3,11 +3,7 @@ import styles from "./Blogs.module.css";
 import { Button, Popconfirm, Space, Table } from "antd";
 import { QuestionCircleOutlined } from "@ant-design/icons";
 import { useQuery, useQueryClient } from "react-query";
-import {
-  deleteBlog,
-  deleteBloggerBlog,
-  getAllBlog,
-} from "../../../../constants/Api";
+import { deleteBloggerBlog, getAllBlog } from "../../../../constants/Api";
 
 const Blogs = () => {
   const date = new Date();

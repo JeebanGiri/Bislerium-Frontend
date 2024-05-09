@@ -3,6 +3,9 @@ import RegisterImg from "../../../assets/Images/Blog/blog.jpeg";
 import { useNavigate } from "react-router-dom";
 import { FaRegEdit } from "react-icons/fa";
 import { BsCalendarDate } from "react-icons/bs";
+import { useQuery } from "react-query";
+import { getAllBlog } from "../../../constants/Api";
+import { formatDate } from "../../../constants/formatDate";
 
 const Home = () => {
   const navigateTo = useNavigate();
@@ -19,6 +22,28 @@ const Home = () => {
     navigateTo("/blog");
   };
 
+  const imgages = {
+    img1: "",
+  };
+
+  //--------FETCH Blogger INFO-------------
+  const {
+    data: BlogInfo,
+    isLoading,
+    isError,
+  } = useQuery("blog-details", () => getAllBlog());
+
+  if (isLoading) return <div>Loading...</div>;
+  if (isError) return <div>Error fetching data</div>;
+
+  console.log(BlogInfo, "bloginfo");
+
+  const blogId = BlogInfo?.data[0]?.id;
+  console.log(blogId, "Blogid");
+
+  const tableData = BlogInfo?.data;
+  console.log(tableData);
+
   return (
     <>
       <div className={styles["blog-landing"]}>
@@ -31,34 +56,34 @@ const Home = () => {
           </span>
         </div>
         <div className={styles.landingpage}>
-          <div className={styles["box-frame"]}>
-            <div className={styles["blog-box"]}>
-              <div className={styles["img-side"]}>
-                <img src={RegisterImg} alt="Blog 1" />
-              </div>
-              <div className={styles["content-side"]}>
-                <div className={styles.blogtitle}>
-                  <p>Title of the Blog where it arise?</p>
+          {tableData.map((blog) => (
+            <div key={blog.id} className={styles["box-frame"]}>
+              <div className={styles["blog-box"]}>
+                <div className={styles["img-side"]}>
+                  <img src={RegisterImg} alt="Blog" />
                 </div>
-                <span className={styles.blogdetails}>
-                  <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Totam a, iure quidem repudiandae tempora blanditiis
-                    mollitia! Dolor impedit fugit ipsum?
-                  </p>
-                  <button onClick={goToBlog}>Continue Reading</button>
-                </span>
-                <span className={styles["footer-side"]}>
-                  <span>
-                    <FaRegEdit /> author name
+                <div className={styles["content-side"]}>
+                  <div className={styles.blogtitle}>
+                    <p>{blog.title}</p>
+                  </div>
+                  <span className={styles.blogdetails}>
+                    <p>{blog.content}</p>
+                    <button onClick={() => goToBlog(blog.id)}>
+                      Continue Reading
+                    </button>
                   </span>
-                  <span>
-                    <BsCalendarDate /> date
+                  <span className={styles["footer-side"]}>
+                    <span>
+                      <FaRegEdit /> {blog.User ? blog.User.fullName : "Unknown"}
+                    </span>
+                    <span>
+                      <BsCalendarDate /> {formatDate(blog.createdDate)}
+                    </span>
                   </span>
-                </span>
+                </div>
               </div>
             </div>
-          </div>
+          ))}
           <div className={styles["recent-blog"]}>
             <div>
               <p>Recent Post</p>
@@ -75,4 +100,5 @@ const Home = () => {
     </>
   );
 };
+
 export default Home;
