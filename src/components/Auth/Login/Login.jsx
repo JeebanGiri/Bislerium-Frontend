@@ -34,8 +34,8 @@ const Login = () => {
           localStorage.setItem("role", role);
 
           if (Jwt_token && role === "Admin") {
-            console.log(role);
             navigateTo("/admin-dashboard");
+            window.location.reload();
           } else {
             setTimeout(() => {
               navigateTo("/");

@@ -1,0 +1,34 @@
+.indi_div {
+  height: 65px;
+  width: 135px;
+  background-color: rgb(255, 255, 255);
+  text-align: center;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-left: 20px;
+  border-bottom: 1px solid #e7e7e9;
+  border-right: 1px solid #e7e7e9;
+}
+.icon {
+  padding-top: 15px;
+}
+.text {
+  font-size: 10px;
+  font-weight: bold;
+  margin-top: 7px;
+  font-family: "Roboto";
+}
+a {
+  text-decoration: none;
+}
+.nav {
+  color: #141924;
+}
+.nav:hover {
+  color: #008cba;
+}
+.navActive {
+  color: #008cba;
+  background-color: rebeccapurple;
+}

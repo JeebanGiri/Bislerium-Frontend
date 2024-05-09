@@ -8,8 +8,9 @@ import "react-toastify/dist/ReactToastify.css";
 
 export const ChangePassword = () => {
   const [changePasswordUser, setChangePasswordUser] = useState({
-    old_password: "",
-    new_password: "",
+    oldPassword: "",
+    password: "",
+    confirmPassword: "",
   });
 
   const changePMutation = useMutation((data) => {
@@ -20,6 +21,7 @@ export const ChangePassword = () => {
         toast.success(message);
       })
       .catch((error) => {
+        console.log(error, "change error");
         const errorMsg =
           error.response.data.message || error.response.data.error.message;
         if (Array.isArray(errorMsg)) {
@@ -51,7 +53,7 @@ export const ChangePassword = () => {
                   <input
                     type="text"
                     id="password"
-                    name="old_password"
+                    name="oldPassword"
                     className={styles.cpassword}
                     onChange={handlePasswordChange}
                     placeholder="Enter Current Password"
@@ -69,8 +71,26 @@ export const ChangePassword = () => {
                 <div className={styles.lockIcon}>
                   <input
                     type="text"
-                    id="new_password"
-                    name="new_password"
+                    id="password"
+                    name="password"
+                    onChange={handlePasswordChange}
+                    placeholder="Enter new Password"
+                  />
+                  <span className={styles.icons}>
+                    <IoIosLock />
+                  </span>
+                </div>
+              </label>
+              <hr />
+            </span>
+            <span>
+              <label htmlFor="password">
+                Confirm Password <span style={{ color: "red" }}>*</span>
+                <div className={styles.lockIcon}>
+                  <input
+                    type="text"
+                    id="confirmPassword"
+                    name="confirmPassword"
                     onChange={handlePasswordChange}
                     placeholder="Enter new Password"
                   />

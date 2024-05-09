@@ -15,7 +15,7 @@ const HomeLayout = () => {
 
   return (
     <>
-      {isLogin == true && role === "Blogger" ? (
+      {(isLogin == true && role === "Blogger") || role === "Admin" ? (
         <LoginedNavigation />
       ) : (
         <HomeNavigation />
