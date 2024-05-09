@@ -10,29 +10,44 @@ const CreateBlog = () => {
   const [formData, setFormData] = useState({
     title: "",
     content: "",
-    image: [],
+    imageFile: "",
   });
 
   const handleChange = (event) => {
+    // const { name, files, value } = event.target;
+
+    // // For handling the multiple files sent in the image input
+    // if (files) {
+    //   if (name === "image") {
+    //     const newImages = [];
+    //     for (let i = 0; i < files.length; i++) {
+    //       newImages.push(files[i]);
+    //     }
+    //     setFormData({
+    //       ...formData,
+    //       image: newImages,
+    //     });
+    //   } else {
+    //     setFormData({
+    //       ...formData,
+    //       [name]: files[0],
+    //     });
+    //   }
+    // } else {
+    //   setFormData({
+    //     ...formData,
+    //     [name]: value,
+    //   });
+    // }
+
     const { name, files, value } = event.target;
 
-    // For handling the multiple files sent in the image input
     if (files) {
-      if (name === "image") {
-        const newImages = [];
-        for (let i = 0; i < files.length; i++) {
-          newImages.push(files[i]);
-        }
-        setFormData({
-          ...formData,
-          image: newImages,
-        });
-      } else {
-        setFormData({
-          ...formData,
-          [name]: files[0],
-        });
-      }
+      // Store only the first file
+      setFormData({
+        ...formData,
+        [name]: files[0],
+      });
     } else {
       setFormData({
         ...formData,
@@ -46,20 +61,45 @@ const CreateBlog = () => {
     setFormData({
       title: "",
       content: "",
-      image: [],
+      imageFile: "",
     });
   };
 
   const handleCreate = () => {
+    // const data = new FormData();
+    // Object.keys(formData).forEach((key) => {
+    //   const value = formData[key];
+    //   if (Array.isArray(value)) {
+    //     value.forEach((file) => data.append(key, file));
+    //   } else {
+    //     data.append(key, value);
+    //   }
+    // });
+
+    // data.append("title", formData.title);
+    // data.append("content", formData.content);
+    // if (formData.image) {
+    //   data.append("image", formData.image);
+    //   console.log(formData.image);
+    // }
+
     const data = new FormData();
-    Object.keys(formData).forEach((key) => {
-      const value = formData[key];
-      if (Array.isArray(value)) {
-        value.forEach((file) => data.append(key, file));
-      } else {
-        data.append(key, value);
-      }
-    });
+
+    // Append title and content
+    data.append("title", formData.title);
+    data.append("content", formData.content);
+
+    // Append image
+    if (!formData.imageFile) {
+      toast.error("Please select an image.");
+      return;
+    }
+
+    if (formData.imageFile) {
+      console.log(formData.imageFile);
+      data.append("image", formData.imageFile);
+    }
+
     const token = localStorage.getItem("token");
 
     createBlog(data, token)
@@ -98,7 +138,6 @@ const CreateBlog = () => {
                   type="text"
                   name="title"
                   id="blog-title"
-                  value={formData.title}
                   onChange={handleChange}
                 />
               </span>
@@ -109,19 +148,13 @@ const CreateBlog = () => {
                   id="content"
                   className={styles.commentTextArea}
                   rows={10}
-                  value={formData.content}
                   onChange={handleChange}
                 ></textarea>
               </span>
               <span className={styles["img-input"]}>
                 <label htmlFor="images">Choose Image</label>
                 <br />
-                <input
-                  type="file"
-                  name="image"
-                  multiple
-                  onChange={handleChange}
-                />
+                <input type="file" name="imageFile" onChange={handleChange} />
               </span>
               <span className={styles["footer-btn"]}>
                 <button onClick={handleCreate}>Save and Post</button>

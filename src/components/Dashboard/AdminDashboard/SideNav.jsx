@@ -7,8 +7,8 @@ import { AiOutlineTeam } from "react-icons/ai";
 import { TfiAnnouncement } from "react-icons/tfi";
 
 const routes = [
-  { path: "/admin", icon: <RxDashboard />, text: "Dashboard" },
-  { path: "/admin/blogs", icon: <TfiAnnouncement />, text: "Blogs" },
+  { path: "/admin-dashboard/", icon: <RxDashboard />, text: "Dashboard" },
+  { path: "/admin-dashboard/blogs", icon: <TfiAnnouncement />, text: "Blogs" },
   { path: "/admin/admin", icon: <AiOutlineTeam />, text: "Admins" },
 ];
 

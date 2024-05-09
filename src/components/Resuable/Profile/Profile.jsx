@@ -6,7 +6,8 @@ import { useNavigate } from "react-router-dom";
 import { LuLogOut } from "react-icons/lu";
 import { IoMailOutline } from "react-icons/io5";
 import { TbBrandBlogger } from "react-icons/tb";
-import Logout from "../../Auth/Logout";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Profile = () => {
   const navigateTo = useNavigate();
@@ -23,9 +24,16 @@ const Profile = () => {
   };
 
   const handleLogout = () => {
-    return <Logout />;
+    localStorage.removeItem("token");
+    navigateTo("/login");
+    setTimeout(() => {
+      toast.warn("Logout Successfully!");
+      // Reload the page after the message is displayed
+      setTimeout(() => {
+        window.location.reload();
+      }, 2000); // Adjust the time according to your preference
+    }, 0);
   };
-
   const { data } = useQuery("get-profile", () => userProfile(token));
   console.log(data, "datas");
 

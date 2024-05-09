@@ -1,0 +1,43 @@
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+th,
+td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  font-family: "Roboto";
+}
+th {
+  text-align: left;
+  background-color: #f2f2f2;
+}
+
+h1 {
+  font-family: "Roboto";
+  color: rgb(112, 161, 205);
+  font-weight: 400;
+  font-size: 23px;
+}
+
+.submitButton {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.subadmin-table {
+  margin-top: 10px;
+  width: 1200px;
+  justify-content: center;
+  left: 50%;
+}
+
+.icons {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}

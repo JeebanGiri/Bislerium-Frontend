@@ -29,7 +29,30 @@ export const changePassword = (updatePassword, token) =>
 
 // create hotel
 export const createBlog = async (newBlog, token) =>
-  await api.post("/Blog/create-blog", newBlog, {
+  api.post("/Blog/create-blog", newBlog, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+
+// get blogger blog
+export const getBloggerBlog = async (token) =>
+  api.get("/Blog/get-blog", {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+
+// ----------DELETE THE Blog ----------------
+export const deleteBlog = (blogId, token) =>
+  api.delete(`/Blog/delete-blog/${blogId}`, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+
+export const deleteBloggerBlog = (blogId, token) =>
+  api.delete(`/Blog/delete-blog/${blogId}`, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+
+// -----GET ALL BLOG-----------------
+export const getAllBlog = async (token) =>
+  api.get("/Blog/get-all-blog", {
     headers: { Authorization: `Bearer ${token}` },
   });
 

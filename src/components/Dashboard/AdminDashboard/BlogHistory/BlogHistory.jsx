@@ -1,11 +1,11 @@
 import { useState } from "react";
-import styles from "./ViewBloggerBlog.module.css";
+import styles from "./BlogHistory.module.css";
 import { Button, Popconfirm, Space, Table, Tag } from "antd";
 import { QuestionCircleOutlined } from "@ant-design/icons";
 import { useQuery, useQueryClient } from "react-query";
 import { deleteBlog, getBloggerBlog } from "../../../../constants/Api";
 
-const ViewBloggerBlog = () => {
+const BlogHistory = () => {
   const [top, setTop] = useState("topLeft");
   const [bottom, setBottom] = useState("bottomRight");
 
@@ -105,7 +105,6 @@ const ViewBloggerBlog = () => {
       ),
     },
   ];
-
   return (
     <>
       <div className={styles["blogger-blogs"]}>
@@ -123,4 +122,4 @@ const ViewBloggerBlog = () => {
     </>
   );
 };
-export default ViewBloggerBlog;
+export default BlogHistory;
