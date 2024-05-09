@@ -8,6 +8,10 @@ const api = axios.create({
 export const registerBolgger = (newUser) =>
   api.post("/User/register-user", newUser);
 
+// ---------REGISTER BLOGGER-------------
+export const registerSubAdmin = (newUser) =>
+  api.post("/User/register-user", newUser);
+
 // ---------LOGIN USER-------------
 export const loginBolgger = (newUser) => api.post("/User/login-user", newUser);
 
