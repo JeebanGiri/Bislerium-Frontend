@@ -58,8 +58,6 @@ const AddAdmin = () => {
         }
       })
       .catch((error) => {
-        console.error("Error:", error);
-        console.log(error.response.data.errors.ConfirmPassword);
         const errorMsg =
           error.response.data.message ||
           error.response.data.errors.FullName ||

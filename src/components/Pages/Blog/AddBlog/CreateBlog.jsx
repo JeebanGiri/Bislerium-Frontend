@@ -97,17 +97,27 @@ const CreateBlog = () => {
 
     createBlog(data, token)
       .then((response) => {
-        console.log(response);
-        const message = response.data.message;
-        toast.success(message);
-        setTimeout(() => {
-          navigateTo("/");
-        }, 2000);
+        if (response.status === 200) {
+          console.log(response);
+          const message = response.data.message;
+          toast.success(message);
+          setTimeout(() => {
+            navigateTo("/");
+          }, 2000);
+        } else {
+          const errors = response.data.errors;
+          console.log(errors);
+
+          Object.values(errors).forEach((errorArr) => {
+            errorArr.forEach((errMsg) => {
+              toast.error(errMsg);
+            });
+          });
+        }
       })
       .catch((error) => {
-        console.log(error.response);
         const errorMsg =
-          error.response.data.message || error.response.data.error.message;
+          error.response.data.message || error.response.data.errors;
         if (Array.isArray(errorMsg)) {
           errorMsg.forEach((err) => toast.error(err));
         } else if (errorMsg) {
