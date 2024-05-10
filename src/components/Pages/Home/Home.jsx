@@ -17,13 +17,10 @@ const Home = () => {
     navigateTo("/create-blog");
   };
 
-  const goToBlog = (e) => {
+  const goToBlog = (e, blogId) => {
     e.preventDefault();
-    navigateTo("/blog");
-  };
-
-  const imgages = {
-    img1: "",
+    // Navigate to the blog page with the clicked blogId as a query parameter
+    navigateTo(`/blog?blogId=${blogId}`);
   };
 
   //--------FETCH Blogger INFO-------------
@@ -41,14 +38,11 @@ const Home = () => {
   console.log(BlogInfo, "bloginfo");
   console.log(RecentBlog, "Recent Blog");
 
-  const blogId = BlogInfo?.data[0]?.id;
-  console.log(blogId, "Blogid");
-
   const tableData = BlogInfo?.data;
   console.log(tableData);
 
-  const tableData1 = RecentBlog?.data;
-  console.log(tableData1);
+  const recentBlogData = RecentBlog?.data;
+  console.log(recentBlogData);
 
   return (
     <>
@@ -74,7 +68,7 @@ const Home = () => {
                   </div>
                   <span className={styles.blogdetails}>
                     <p>{blog.content}</p>
-                    <button onClick={() => goToBlog(blog.id)}>
+                    <button onClick={(e) => goToBlog(e, blog.id)}>
                       Continue Reading
                     </button>
                   </span>
@@ -93,12 +87,14 @@ const Home = () => {
           <div className={styles["recent-blog"]}>
             <div>
               <p>Recent Post</p>
-              <p className={styles.bolgss}>
-                <li>This is blog1</li>
-                <li>This is blog2</li>
-                <li>This is blog3</li>
-                <li>This is blog4</li>
-              </p>
+              <ol type="circle" className={styles.bolgss}>
+                {/* Loop through recent blog data and render list items */}
+                {recentBlogData.map((blog) => (
+                  <li key={blog.id}>
+                    {blog.title} - {formatDate(blog.createdDate)}
+                  </li>
+                ))}
+              </ol>
             </div>
           </div>
         </div>

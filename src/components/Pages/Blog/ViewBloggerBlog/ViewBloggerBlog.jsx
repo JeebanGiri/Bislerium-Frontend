@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useState } from "react";
 import styles from "./ViewBloggerBlog.module.css";
 import { Button, Popconfirm, Space, Table, Tag } from "antd";

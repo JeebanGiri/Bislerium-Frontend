@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import styles from "./Blog.module.css";
 import { RiAdminFill } from "react-icons/ri";
 import { CiCalendarDate } from "react-icons/ci";
@@ -9,7 +10,10 @@ import Blogs from "../../../../assets/Images/Blog/blog.jpeg";
 import { VscHeartFilled } from "react-icons/vsc";
 import { IoIosHeartDislike } from "react-icons/io";
 import { useState } from "react";
-import LoginPopup from "../../../Auth/LoginPopup/LoginPopup";
+import { useSearchParams } from "react-router-dom";
+import { useQuery } from "react-query";
+import { getBlogById, getRecentBlog } from "../../../../constants/Api";
+import { formatDate } from "../../../../constants/formatDate";
 
 const Blog = () => {
   const [likeActive, setLikeActive] = useState(false);
@@ -17,6 +21,10 @@ const Blog = () => {
   const [likes, setLikes] = useState(3);
   const [dislikeActive, setDislikeActive] = useState(false);
   const [commentActive, setCommentActive] = useState(false);
+  const [searchParams, setSearchParam] = useSearchParams();
+
+  const BlogId = searchParams.get("blogId");
+  console.log(BlogId, "Blogs");
 
   const toggleLike = () => {
     setLikeActive(!likeActive);
@@ -53,17 +61,34 @@ const Blog = () => {
   // Get the formatted date and time string
   const formattedDateTime = date.toLocaleString("en-US", options);
 
+  const {
+    data: RecentBlog,
+    isLoading,
+    isError,
+  } = useQuery("recent-blog", () => getRecentBlog(BlogId));
+
+  const { data: BlogInfo } = useQuery("blog-info", () => getBlogById(BlogId));
+  console.log(BlogInfo, "blogger blog");
+
+  if (isLoading) return <div>Loading...</div>;
+  if (isError) return <div>Error fetching data</div>;
+
+  const recentBlogData = RecentBlog?.data;
+  console.log(recentBlogData);
+
+  const blog = BlogInfo.data;
+
   return (
     <>
       <div className={styles.blogpage}>
         <div className={styles.header}>
-          <p className={styles.titles}>Blog Title</p>
+          <p className={styles.titles}>{blog.title}</p>
           <div className={styles.results}>
             <span>
-              <RiAdminFill /> admin
+              <RiAdminFill /> {blog.User ? blog.User.fullName : "Unknown"}
             </span>
             <span>
-              <CiCalendarDate /> {formattedDateTime}
+              <CiCalendarDate /> {formatDate(blog.createdDate)}
             </span>
             <span>
               <FiEye /> 8
@@ -81,7 +106,7 @@ const Blog = () => {
                   <FaRegHeart />
                 )}
               </span>
-              {openLogin ? <LoginPopup /> : null}
+              {/* {openLogin ? <LoginPopup /> : null} */}
               <span className={styles["vote-text"]}>{likes} Like</span>
             </p>
             <p className={styles["voting-content"]}>
@@ -98,22 +123,13 @@ const Blog = () => {
             </p>
           </div>
           <div className={styles["blog-content"]}>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. In
-              pariatur eum nulla accusamus, fugit nobis modi laboriosam
-              blanditiis. Maiores illum expedita dicta in, error iure laborum
-              voluptate autem unde blanditiis aperiam accusamus nisi sed
-              repudiandae tempore eum nobis, optio non. Iure adipisci dolor
-              ullam necessitatibus aut ea quae aliquid magnam!
-            </p>
+            <p>{blog.content}</p>
           </div>
         </div>
         <div className={styles["blog-fotter"]}>
           <div className={styles["comment-section"]}>
             <p>Comment (0)</p>
-            <p className={styles.commentlines}>
-              <hr />
-            </p>
+            <hr />
             <p>No comments found</p>
             <p className={styles.commentbox}>leave a comment</p>
             <hr />
@@ -134,10 +150,12 @@ const Blog = () => {
             <div>
               <p>Recent Post</p>
               <p className={styles.bolgss}>
-                <li>This is blog1</li>
-                <li>This is blog2</li>
-                <li>This is blog3</li>
-                <li>This is blog4</li>
+                {/* Loop through recent blog data and render list items */}
+                {recentBlogData.map((blog) => (
+                  <li key={blog.id}>
+                    {blog.title} - {formatDate(blog.createdDate)}
+                  </li>
+                ))}
               </p>
             </div>
           </div>

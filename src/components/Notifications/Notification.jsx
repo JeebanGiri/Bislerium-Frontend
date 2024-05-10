@@ -18,9 +18,7 @@ const options = {
 // Get the formatted date and time string
 const formattedDateTime = date.toLocaleString("en-US", options);
 
-
 const Notification = () => {
-  
   const token = localStorage.getItem("token");
   const { data } = useQuery("notification", () => getNotification(token));
 
