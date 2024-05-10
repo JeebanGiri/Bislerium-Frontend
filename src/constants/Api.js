@@ -65,6 +65,9 @@ export const getAllBlog = async (token) =>
     headers: { Authorization: `Bearer ${token}` },
   });
 
+// -----GET Recent BLOG-----------------
+export const getRecentBlog = () => api.get("/Blog/recent-blog");
+
 // ----------DELETE THE Sub Admin ----------------
 export const deleteSubAdmin = (adminId, token) =>
   api.delete(`/User/delete-user/${adminId}`, {

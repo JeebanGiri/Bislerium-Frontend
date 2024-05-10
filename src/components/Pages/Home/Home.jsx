@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { FaRegEdit } from "react-icons/fa";
 import { BsCalendarDate } from "react-icons/bs";
 import { useQuery } from "react-query";
-import { getAllBlog } from "../../../constants/Api";
+import { getAllBlog, getRecentBlog } from "../../../constants/Api";
 import { formatDate } from "../../../constants/formatDate";
 
 const Home = () => {
@@ -33,16 +33,22 @@ const Home = () => {
     isError,
   } = useQuery("blog-details", () => getAllBlog());
 
+  const { data: RecentBlog } = useQuery("recent-blog", () => getRecentBlog());
+
   if (isLoading) return <div>Loading...</div>;
   if (isError) return <div>Error fetching data</div>;
 
   console.log(BlogInfo, "bloginfo");
+  console.log(RecentBlog, "Recent Blog");
 
   const blogId = BlogInfo?.data[0]?.id;
   console.log(blogId, "Blogid");
 
   const tableData = BlogInfo?.data;
   console.log(tableData);
+
+  const tableData1 = RecentBlog?.data;
+  console.log(tableData1);
 
   return (
     <>
