@@ -99,7 +99,8 @@
   border: 1px solid rgb(197, 194, 194);
   border-radius: 3px;
   padding: 10px;
-  width: 285px;
+  width: 355px;
+  cursor: pointer;
   max-height: 500px;
 }
 
@@ -107,7 +108,7 @@
   font-size: 13px;
   height: 30px;
   font-weight: 500;
-  width: 240px;
+  width: 270px;
   background-color: #d1cfcf;
   padding: 5px;
   border-radius: 5px;
@@ -141,4 +142,14 @@
   -webkit-line-clamp: var(--max-lines);
   overflow: hidden;
   text-overflow: ellipsis;
+}
+.bolgss {
+  display: grid;
+  gap: 10px;
+}
+.bolgss li {
+  font-size: 13px;
+  margin-left: 20px;
+  font-family: "Roboto";
+  text-align: justify;
 }

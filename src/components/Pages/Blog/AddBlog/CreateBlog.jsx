@@ -7,6 +7,8 @@ import { useNavigate } from "react-router-dom";
 
 const CreateBlog = () => {
   const navigateTo = useNavigate();
+  const [imagePreview, setImagePreview] = useState(null); // State to hold the image preview URL
+
   const [formData, setFormData] = useState({
     title: "",
     content: "",
@@ -14,32 +16,6 @@ const CreateBlog = () => {
   });
 
   const handleChange = (event) => {
-    // const { name, files, value } = event.target;
-
-    // // For handling the multiple files sent in the image input
-    // if (files) {
-    //   if (name === "image") {
-    //     const newImages = [];
-    //     for (let i = 0; i < files.length; i++) {
-    //       newImages.push(files[i]);
-    //     }
-    //     setFormData({
-    //       ...formData,
-    //       image: newImages,
-    //     });
-    //   } else {
-    //     setFormData({
-    //       ...formData,
-    //       [name]: files[0],
-    //     });
-    //   }
-    // } else {
-    //   setFormData({
-    //     ...formData,
-    //     [name]: value,
-    //   });
-    // }
-
     const { name, files, value } = event.target;
 
     if (files) {
@@ -48,6 +24,12 @@ const CreateBlog = () => {
         ...formData,
         [name]: files[0],
       });
+      // Create a preview URL for the selected image
+      const reader = new FileReader();
+      reader.onload = () => {
+        setImagePreview(reader.result);
+      };
+      reader.readAsDataURL(files[0]);
     } else {
       setFormData({
         ...formData,
@@ -63,6 +45,7 @@ const CreateBlog = () => {
       content: "",
       imageFile: "",
     });
+    setImagePreview(null);
   };
 
   const handleCreate = () => {
@@ -158,6 +141,13 @@ const CreateBlog = () => {
                 <label htmlFor="images">Choose Image</label>
                 <br />
                 <input type="file" name="imageFile" onChange={handleChange} />
+                {imagePreview && (
+                  <img
+                    src={imagePreview}
+                    alt="Selected"
+                    className={styles.imagePreview}
+                  />
+                )}
               </span>
               <span className={styles["footer-btn"]}>
                 <button onClick={handleCreate}>Save and Post</button>

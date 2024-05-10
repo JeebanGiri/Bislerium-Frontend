@@ -96,11 +96,10 @@
   line-height: 20px;
 }
 
-.recent-blog p:nth-child(2) {
-  margin-left: 20px;
-}
 .recent-blog .bolgss {
   padding-top: 10px;
+  text-align: justify;
+  font-size: 11px;
 }
 
 .comment-section .commentlabel {

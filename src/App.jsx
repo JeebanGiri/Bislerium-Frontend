@@ -52,7 +52,6 @@ function App() {
               <Route path="/admin-dashboard" element={<AdminLayout />}>
                 <Route path="" element={<AdminDashboard />} />
                 <Route path="blogs" element={<Blogs />} />
-                {/* <Route path="sub-admin" element={<ViewSubAdmin />} /> */}
                 <Route path="sub-admin" element={<AddAdmin />} />
                 <Route path="blog-history" element={<BlogHistory />} />
               </Route>
