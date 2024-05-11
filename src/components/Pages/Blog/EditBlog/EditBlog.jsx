@@ -1,5 +1,5 @@
 import { useState } from "react";
-import styles from "../CreateBlog.module.css";
+import styles from "../AddBlog/CreateBlog.module.css";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { createBlog } from "../../../../constants/Api";
@@ -7,6 +7,8 @@ import { useNavigate } from "react-router-dom";
 
 const EditBlog = () => {
   const navigateTo = useNavigate();
+  const [imagePreview, setImagePreview] = useState(null); // State to hold the image preview URL
+
   const [formData, setFormData] = useState({
     title: "",
     content: "",
@@ -22,6 +24,12 @@ const EditBlog = () => {
         ...formData,
         [name]: files[0],
       });
+      // Create a preview URL for the selected image
+      const reader = new FileReader();
+      reader.onload = () => {
+        setImagePreview(reader.result);
+      };
+      reader.readAsDataURL(files[0]);
     } else {
       setFormData({
         ...formData,
@@ -37,6 +45,7 @@ const EditBlog = () => {
       content: "",
       imageFile: "",
     });
+    setImagePreview(null);
   };
 
   const handleCreate = () => {
@@ -49,13 +58,6 @@ const EditBlog = () => {
     //     data.append(key, value);
     //   }
     // });
-
-    // data.append("title", formData.title);
-    // data.append("content", formData.content);
-    // if (formData.image) {
-    //   data.append("image", formData.image);
-    //   console.log(formData.image);
-    // }
 
     const data = new FormData();
 
@@ -78,17 +80,27 @@ const EditBlog = () => {
 
     createBlog(data, token)
       .then((response) => {
-        console.log(response);
-        const message = response.data.message;
-        toast.success(message);
-        setTimeout(() => {
-          navigateTo("/");
-        }, 2000);
+        if (response.status === 200) {
+          console.log(response);
+          const message = response.data.message;
+          toast.success(message);
+          setTimeout(() => {
+            navigateTo("/");
+          }, 2000);
+        } else {
+          const errors = response.data.errors;
+          console.log(errors);
+
+          Object.values(errors).forEach((errorArr) => {
+            errorArr.forEach((errMsg) => {
+              toast.error(errMsg);
+            });
+          });
+        }
       })
       .catch((error) => {
-        console.log(error.response);
         const errorMsg =
-          error.response.data.message || error.response.data.error.message;
+          error.response.data.message || error.response.data.errors;
         if (Array.isArray(errorMsg)) {
           errorMsg.forEach((err) => toast.error(err));
         } else if (errorMsg) {
@@ -101,9 +113,9 @@ const EditBlog = () => {
     <>
       <form onSubmit={(e) => e.preventDefault()} encType="multipart/form-data">
         <div className={styles["create-blog"]}>
-          <p>Create your feeds</p>
+          <p>Edit your post</p>
           <div className={styles["blog-article"]}>
-            <div className={styles.header}>Create Blog</div>
+            <div className={styles.header}>Edit Blog</div>
             <hr />
             <div className={styles["blog-content"]}>
               <span className={styles["title-input"]}>
@@ -129,6 +141,13 @@ const EditBlog = () => {
                 <label htmlFor="images">Choose Image</label>
                 <br />
                 <input type="file" name="imageFile" onChange={handleChange} />
+                {imagePreview && (
+                  <img
+                    src={imagePreview}
+                    alt="Selected"
+                    className={styles.imagePreview}
+                  />
+                )}
               </span>
               <span className={styles["footer-btn"]}>
                 <button onClick={handleCreate}>Save and Post</button>

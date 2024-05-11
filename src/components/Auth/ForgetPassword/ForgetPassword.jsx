@@ -21,7 +21,7 @@ const ForgetPassword = () => {
   const handleResetClick = (event) => {
     event.preventDefault();
     axios
-      .post("http://localhost:8848/auth/finalize-password-reset", data)
+      .post("https://localhost:7259/api/User/reset-password", data)
       .then((response) => {
         console.log(response);
         console.log(response.data);

@@ -71,10 +71,14 @@ const CreateBlog = () => {
       return;
     }
 
+    // Append imageFile to FormData
+    data.append("imageFile", formData.imageFile);
+
     if (formData.imageFile) {
       console.log(formData.imageFile);
       data.append("image", formData.imageFile);
     }
+    console.log(formData.imageFile, "images seleted");
 
     const token = localStorage.getItem("token");
 

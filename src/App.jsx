@@ -18,10 +18,13 @@ import AdminDashboard from "./components/Dashboard/AdminDashboard/AdminDashboard
 import AdminLayout from "./components/Layout/Admin/AdminLayout";
 import BlogHistory from "./components/Dashboard/AdminDashboard/BlogHistory/BlogHistory";
 import Blogs from "./components/Dashboard/AdminDashboard/Blogs/Blogs";
-import ViewSubAdmin from "./components/Dashboard/AdminDashboard/ViewSubAdmin/ViewSubAdmin";
 import AddAdmin from "./components/Dashboard/AdminDashboard/AddAdmin/AddAdmin";
+import EditBlog from "./components/Pages/Blog/EditBlog/EditBlog";
+import ForgetPassword from "./components/Auth/ForgetPassword/ForgetPassword";
+import { setupNotifications } from "./utils/Firebase";
 
 function App() {
+  setupNotifications();
   return (
     <>
       <div className="App">
@@ -43,7 +46,8 @@ function App() {
               <Route path="/my-blogs" element={<ViewBloggerBlog />} />
               <Route path="/login-direct" element={<LoginPopup />} />
               <Route path="/create-blog" element={<CreateBlog />} />
-
+              <Route path="/edit-blog" element={<EditBlog />} />
+              <Route path="/forget-password" element={<ForgetPassword />} />
               <Route path="/edit-profile" element={<EditProfleLayout />}>
                 <Route path="" element={<ChangePersonaldetails />} />
                 <Route path="change-password" element={<ChangePassword />} />

@@ -81,3 +81,19 @@ export const deleteSubAdmin = (adminId, token) =>
   api.delete(`/User/delete-user/${adminId}`, {
     headers: { Authorization: `Bearer ${token}` },
   });
+
+export const saveNotificationToken = (data, token) => {
+  return api.post("/firebase/save-token", data, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+};
+
+export const upVote = (blogLike, token) =>
+  api.post("/BlogLike/upvote", blogLike, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+
+export const downVote = (blogDisLike, token) =>
+  api.post("/BlogLike/downvote", blogDisLike, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
