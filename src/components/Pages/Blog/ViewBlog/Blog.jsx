@@ -14,6 +14,7 @@ import { useSearchParams } from "react-router-dom";
 import { useQuery } from "react-query";
 import { getBlogById, getRecentBlog } from "../../../../constants/Api";
 import { formatDate } from "../../../../constants/formatDate";
+import Footer from "../../Footer/Footer";
 
 const Blog = () => {
   const [likeActive, setLikeActive] = useState(false);
@@ -76,19 +77,19 @@ const Blog = () => {
   const recentBlogData = RecentBlog?.data;
   console.log(recentBlogData);
 
-  const blog = BlogInfo.data;
+  const blog = BlogInfo?.data;
 
   return (
     <>
       <div className={styles.blogpage}>
         <div className={styles.header}>
-          <p className={styles.titles}>{blog.title}</p>
+          <p className={styles.titles}>{blog?.title}</p>
           <div className={styles.results}>
             <span>
-              <RiAdminFill /> {blog.User ? blog.User.fullName : "Unknown"}
+              <RiAdminFill /> {blog?.User ? blog?.User.fullName : "Unknown"}
             </span>
             <span>
-              <CiCalendarDate /> {formatDate(blog.createdDate)}
+              <CiCalendarDate /> {formatDate(blog?.createdDate)}
             </span>
             <span>
               <FiEye /> 8
@@ -99,14 +100,13 @@ const Blog = () => {
           </div>
           <div className={styles.voting}>
             <p className={styles["voting-content"]}>
-              <span className={styles.icons} onClick={handleLoginPopup}>
+              <span className={styles.icons} onClick={toggleLike}>
                 {likeActive ? (
                   <VscHeartFilled className={styles.filledheart} />
                 ) : (
                   <FaRegHeart />
                 )}
               </span>
-              {/* {openLogin ? <LoginPopup /> : null} */}
               <span className={styles["vote-text"]}>{likes} Like</span>
             </p>
             <p className={styles["voting-content"]}>
@@ -123,7 +123,7 @@ const Blog = () => {
             </p>
           </div>
           <div className={styles["blog-content"]}>
-            <p>{blog.content}</p>
+            <p>{blog?.content}</p>
           </div>
         </div>
         <div className={styles["blog-fotter"]}>
@@ -149,18 +149,19 @@ const Blog = () => {
           <div className={styles["recent-blog"]}>
             <div>
               <p>Recent Post</p>
-              <p className={styles.bolgss}>
+              <ol type="circle" className={styles.bolgss}>
                 {/* Loop through recent blog data and render list items */}
                 {recentBlogData.map((blog) => (
                   <li key={blog.id}>
                     {blog.title} - {formatDate(blog.createdDate)}
                   </li>
                 ))}
-              </p>
+              </ol>
             </div>
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 };

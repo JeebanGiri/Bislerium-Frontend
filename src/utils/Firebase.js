@@ -5,15 +5,15 @@ import { saveNotificationToken } from "../constants/Api";
 //--------GET TOKEN FROM LOCAL STORAGE---------
 const jwt = localStorage.getItem("token");
 
-// -------------Initialize Firebase----------------
+// -------------Initialize Firebase----------------     
 const firebaseConfig = {
-  apiKey: "AIzaSyDC1ecgHuzmN2RxDyQcsHZRDSnSAaqVU0w",
-  authDomain: "horizon-residence.firebaseapp.com",
-  projectId: "horizon-residence",
-  storageBucket: "horizon-residence.appspot.com",
-  messagingSenderId: "740497421368",
-  appId: "1:740497421368:web:4abea47c8416290d64a2cd",
-  measurementId: "G-31KNRS5J5F",
+  apiKey: "AIzaSyA-DOii6Zph2AbSjMyRWlFYUtedO9ekKrM",
+  authDomain: "bislerium-blogging-system.firebaseapp.com",
+  projectId: "bislerium-blogging-system",
+  storageBucket: "bislerium-blogging-system.appspot.com",
+  messagingSenderId: "832861615599",
+  appId: "1:832861615599:web:0532cad41f9820f792721a",
+  measurementId: "G-SC9K3CPJG9",
 };
 
 const firebaseApp = initializeApp(firebaseConfig);
