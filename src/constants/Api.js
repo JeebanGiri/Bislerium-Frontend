@@ -88,12 +88,18 @@ export const saveNotificationToken = (data, token) => {
   });
 };
 
-export const upVote = (blogLike, token) =>
-  api.post("/BlogLike/upvote", blogLike, {
+export const upVote = (blogLike, BlogId, token) =>
+  api.post(`/BlogLike/upvote/${BlogId}`, blogLike, {
     headers: { Authorization: `Bearer ${token}` },
   });
+
+export const getUserLike = (BlogId, UserId) =>
+  api.get(`BlogLike/${BlogId}/${UserId}`);
 
 export const downVote = (blogDisLike, token) =>
   api.post("/BlogLike/downvote", blogDisLike, {
     headers: { Authorization: `Bearer ${token}` },
   });
+
+export const getUserDisLike = (BlogId, UserId) =>
+  api.get(`BlogLike/${BlogId}/${UserId}`);

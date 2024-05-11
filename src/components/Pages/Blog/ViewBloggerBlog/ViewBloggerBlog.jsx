@@ -18,11 +18,7 @@ const ViewBloggerBlog = () => {
     getBloggerBlog(token)
   );
 
-  console.log(BlogInfo, "hotelinfo");
-
   const blogId = BlogInfo?.data[0]?.id;
-  console.log(blogId, "hotelid");
-
   const tableData = BlogInfo?.data;
 
   const handleDeleteBlog = async (blogId) => {

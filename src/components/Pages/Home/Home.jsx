@@ -1,5 +1,4 @@
 import styles from "./Home.module.css";
-import RegisterImg from "../../../assets/Images/Blog/blog.jpeg";
 import { useNavigate } from "react-router-dom";
 import { FaRegEdit } from "react-icons/fa";
 import { BsCalendarDate } from "react-icons/bs";
@@ -9,10 +8,6 @@ import { formatDate } from "../../../constants/formatDate";
 
 const Home = () => {
   const navigateTo = useNavigate();
-
-  const token = localStorage.getItem("token");
-  console.log(token);
-
   const toggleCreateBlog = () => {
     navigateTo("/create-blog");
   };
@@ -34,15 +29,8 @@ const Home = () => {
 
   if (isLoading) return <div>Loading...</div>;
   if (isError) return <div>Error fetching data</div>;
-
-  console.log(BlogInfo, "bloginfo");
-  console.log(RecentBlog, "Recent Blog");
-
   const tableData = BlogInfo?.data;
-  console.log(tableData);
-
   const recentBlogData = RecentBlog?.data;
-  console.log(recentBlogData);
 
   return (
     <>
@@ -56,11 +44,20 @@ const Home = () => {
           </span>
         </div>
         <div className={styles.landingpage}>
-          {tableData.map((blog) => (
+          {tableData?.map((blog) => (
             <div key={blog.id} className={styles["box-frame"]}>
               <div className={styles["blog-box"]}>
                 <div className={styles["img-side"]}>
-                  <img src={RegisterImg} alt="Blog" />
+                  <img src={blog.image} alt="" />
+                  {blog.image}
+                  {/* {blog.image ? (
+                    <img
+                      src={`${BACKEND_URL}/Images/${blog.image}`} // Construct the URL properly
+                      alt="Blog Image"
+                    />
+                  ) : (
+                    <p>No image available</p>
+                  )} */}
                 </div>
                 <div className={styles["content-side"]}>
                   <div className={styles.blogtitle}>

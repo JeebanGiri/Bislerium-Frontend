@@ -19,6 +19,7 @@
 .label1 .info {
   display: flex;
 }
+
 .label1 {
   text-overflow: ellipsis;
   width: 300px;
