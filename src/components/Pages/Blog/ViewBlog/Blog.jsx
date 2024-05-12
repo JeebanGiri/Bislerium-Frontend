@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import styles from "./Blog.module.css";
 import { RiAdminFill } from "react-icons/ri";
 import { CiCalendarDate } from "react-icons/ci";
@@ -8,65 +7,166 @@ import { FiEye } from "react-icons/fi";
 import { LuHeartOff } from "react-icons/lu";
 import { VscHeartFilled } from "react-icons/vsc";
 import { IoIosHeartDislike } from "react-icons/io";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { useQuery } from "react-query";
-import { getBlogById, getRecentBlog, upVote } from "../../../../constants/Api";
+import {
+  createComment,
+  downVote,
+  getBlogById,
+  getComment,
+  getRecentBlog,
+  getTotalLikes,
+  upVote,
+} from "../../../../constants/Api";
 import { formatDate } from "../../../../constants/formatDate";
 import Footer from "../../Footer/Footer";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useQuery } from "react-query";
 
 const Blog = () => {
   const [likeActive, setLikeActive] = useState(false);
-  const [openLogin, setOpenLogin] = useState(false);
   const [dislikeActive, setDislikeActive] = useState(false);
   const [commentActive, setCommentActive] = useState(false);
   const [searchParams, setSearchParam] = useSearchParams();
   const BlogId = searchParams.get("blogId");
 
-  const toggleDislike = () => {
-    setDislikeActive(!dislikeActive);
-  };
-
-  const toggleComment = () => {
-    setCommentActive(!commentActive);
-  };
-
-  const handleLoginPopup = () => {
-    setOpenLogin(!openLogin);
-  };
-
-  const [userData, setUserData] = useState({
-    totalLike: "",
+  const [commentData, setCommentData] = useState({
+    content: "",
+    blogId: BlogId,
   });
+
+  const handleCommentChange = (event) => {
+    const { name, value } = event.target;
+    setCommentData({ ...commentData, [name]: value });
+  };
 
   const {
     data: RecentBlog,
-    isLoading,
-    isError,
+    isLoading: recentBlogLoading,
+    isError: recentBlogError,
   } = useQuery("recent-blog", () => getRecentBlog(BlogId));
 
-  const { data: BlogInfo } = useQuery("blog-info", () => getBlogById(BlogId));
+  const {
+    data: BlogInfo,
+    isLoading: blogInfoLoading,
+    isError: blogInfoError,
+  } = useQuery("blog-info", () => getBlogById(BlogId));
 
-  if (isLoading) return <div>Loading...</div>;
-  if (isError) return <div>Error fetching data</div>;
+  const {
+    data: totalLike,
+    isLoading: totalLikeLoading,
+    isError: totalLikeError,
+  } = useQuery("total-likes", () => getTotalLikes(BlogId));
+
+  const {
+    data: commentInfo,
+    isLoading: commentLoading,
+    isError: commentError,
+  } = useQuery("comment-info", () => getComment(BlogId));
+  console.log(commentInfo, "Cmtinfo");
+
+  if (
+    recentBlogLoading ||
+    blogInfoLoading ||
+    totalLikeLoading ||
+    commentLoading
+  )
+    return <div>Loading...</div>;
+  if (recentBlogError || blogInfoError || totalLikeError || commentError)
+    return <div>Error fetching data</div>;
+
   const recentBlogData = RecentBlog?.data;
   const blog = BlogInfo?.data;
+  console.log(blog, "Blogsssssss");
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setUserData({ ...formatDate, [name]: value });
+  const likeDate = {
+    blogId: blog?.id,
+    reactionType: true,
+  };
+
+  const disLikeDate = {
+    blogId: blog?.id,
+    reactionType: false,
   };
 
   const handleLikeUpload = () => {
     setLikeActive(!likeActive);
     const token = localStorage.getItem("token");
-
-    upVote(userData, BlogId, token)
+    upVote(likeDate, token)
       .then((response) => {
         if (response.status === 200 || response.status === 201) {
           console.log(response);
+          console.log(response.data.message);
+          const message = response.data.message;
+          if (response.data.message === "Cannot upvote a downvoted post") {
+            toast.warning(message);
+          } else {
+            toast.success(message);
+          }
+        } else {
+          const errors = response.data.errors;
+          console.log(errors);
+          Object.values(errors).forEach((errorArr) => {
+            errorArr.forEach((errMsg) => {
+              toast.error(errMsg);
+            });
+          });
+        }
+      })
+      .catch((error) => {
+        const errorMsg =
+          error.response.data.message || error.response.data.errors;
+        if (Array.isArray(errorMsg)) {
+          errorMsg.forEach((err) => toast.error(err));
+        } else if (errorMsg) {
+          toast.error(errorMsg);
+        }
+      });
+  };
+
+  const handleDisLikeUpload = () => {
+    setDislikeActive(!dislikeActive);
+    const token = localStorage.getItem("token");
+    downVote(disLikeDate, token)
+      .then((response) => {
+        if (response.status === 200 || response.status === 201) {
+          console.log(response);
+          const message = response.data.message;
+          if (response.data.message === "Cannot downvote an upvoted post") {
+            toast.warning(message);
+          } else {
+            toast.success(message);
+          }
+        } else {
+          const errors = response.data.errors;
+          console.log(errors);
+          Object.values(errors).forEach((errorArr) => {
+            errorArr.forEach((errMsg) => {
+              toast.error(errMsg);
+            });
+          });
+        }
+      })
+      .catch((error) => {
+        const errorMsg =
+          error.response.data.message || error.response.data.errors;
+        if (Array.isArray(errorMsg)) {
+          errorMsg.forEach((err) => toast.error(err));
+        } else if (errorMsg) {
+          toast.error(errorMsg);
+        }
+      });
+  };
+
+  const handleCommentUpload = (event) => {
+    event.preventDefault();
+    setCommentActive(!commentActive);
+
+    const token = localStorage.getItem("token");
+    createComment(commentData, token)
+      .then((response) => {
+        if (response.status === 200 || response.status === 201) {
           const message = response.data.message;
           toast.success(message);
         } else {
@@ -112,12 +212,8 @@ const Blog = () => {
             </div>
             <div className={styles.voting}>
               <p className={styles["voting-content"]}>
-                <span
-                  className={styles.icons}
-                  onChange={handleChange}
-                  onClick={handleLikeUpload}
-                >
-                  {likeActive ? (
+                <span className={styles.icons} onClick={handleLikeUpload}>
+                  {likeActive || blog.total_Like ? (
                     <VscHeartFilled
                       name="totalLike"
                       className={styles.filledheart}
@@ -126,13 +222,21 @@ const Blog = () => {
                     <FaRegHeart name="totalLike" />
                   )}
                 </span>
-                <span className={styles["vote-text"]}> Like</span>
+                <span className={styles["vote-text"]}>
+                  {blog.total_Like} Like
+                </span>
               </p>
               <p className={styles["voting-content"]}>
-                <span className={styles.icons} onClick={toggleDislike}>
-                  {dislikeActive ? <IoIosHeartDislike /> : <LuHeartOff />}
+                <span className={styles.icons} onClick={handleDisLikeUpload}>
+                  {dislikeActive || blog.total_DisLike ? (
+                    <IoIosHeartDislike />
+                  ) : (
+                    <LuHeartOff />
+                  )}
                 </span>
-                <span className={styles["vote-text"]}>2 DisLike</span>
+                <span className={styles["vote-text"]}>
+                  {blog.total_DisLike} DisLike
+                </span>
               </p>
               <p className={styles["voting-content"]}>
                 <span className={styles.icons}>
@@ -156,13 +260,16 @@ const Blog = () => {
                 Message
               </label>
               <textarea
-                name="comment"
+                name="content"
                 id="comment"
                 className={styles.commentTextArea}
+                onChange={handleCommentChange}
                 rows={3}
               ></textarea>
               <div className={styles["comment-btn"]}>
-                <button type="submit">Submit</button>
+                <button type="submit" onClick={handleCommentUpload}>
+                  Submit
+                </button>
               </div>
             </div>
             <div className={styles["recent-blog"]}>

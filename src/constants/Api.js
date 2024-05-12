@@ -36,7 +36,7 @@ export const changePassword = (updatePassword, token) =>
     headers: { Authorization: `Bearer ${token}` },
   });
 
-// create hotel
+// create Blog
 export const createBlog = async (newBlog, token) =>
   api.post("/Blog/create-blog", newBlog, {
     headers: { Authorization: `Bearer ${token}` },
@@ -88,13 +88,16 @@ export const saveNotificationToken = (data, token) => {
   });
 };
 
-export const upVote = (blogLike, BlogId, token) =>
-  api.post(`/BlogLike/upvote/${BlogId}`, blogLike, {
+export const upVote = (blogLike, token) =>
+  api.post("/BlogLike/upvote", blogLike, {
     headers: { Authorization: `Bearer ${token}` },
   });
 
+export const getTotalLikes = (blogId) =>
+  api.get(`/BlogLike/get-total-likes/${blogId}`);
+
 export const getUserLike = (BlogId, UserId) =>
-  api.get(`BlogLike/${BlogId}/${UserId}`);
+  api.get(`BlogLike/get-users-likes/${BlogId}/${UserId}`);
 
 export const downVote = (blogDisLike, token) =>
   api.post("/BlogLike/downvote", blogDisLike, {
@@ -102,4 +105,12 @@ export const downVote = (blogDisLike, token) =>
   });
 
 export const getUserDisLike = (BlogId, UserId) =>
-  api.get(`BlogLike/${BlogId}/${UserId}`);
+  api.get(`BlogLike/get-users-dislikes/${BlogId}/${UserId}`);
+
+export const createComment = (comment, token) =>
+  api.post("/Comment/create-comment", comment, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+
+export const getComment = (blogId) =>
+  api.get(`/Comment/get-blog-comment/${blogId}`);
