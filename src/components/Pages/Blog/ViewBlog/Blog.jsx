@@ -47,13 +47,8 @@ const Blog = () => {
     const user = jwtDecode(token);
     const userId = user.sub; // 'sub' is the standard claim for user ID
 
-    // Now you can use 'userId' in your application
     console.log("User ID:", userId);
   }, [token]);
-
-  // Now you can use this function to get the user ID wherever needed in your component
-  // const userId = getUserIdFromToken();
-  // console.log(userId);
 
   const handleCommentChange = (event) => {
     const { name, value } = event.target;
