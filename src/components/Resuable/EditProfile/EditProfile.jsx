@@ -56,7 +56,7 @@ const EditProfile = () => {
                       <p>
                         {data.data.fullName.charAt(0).toUpperCase()}
                         {data.data.fullName.split(" ")[1]
-                          ? data.data.full_name
+                          ? data.data.fullName
                               .split(" ")[1]
                               .charAt(0)
                               .toUpperCase()

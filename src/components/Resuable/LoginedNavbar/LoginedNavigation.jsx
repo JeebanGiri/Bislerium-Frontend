@@ -72,7 +72,7 @@ const LoginedNavigation = () => {
               </li>
               <li key="blog" className={style.navItems}>
                 <NavLink
-                  to="/blog"
+                  to="#"
                   exact="true"
                   className={style.navLinksss}
                   // onClick={handleBlogClick}

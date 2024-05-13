@@ -83,7 +83,6 @@
 
 .recent-blog p:first-child {
   font-size: 13px;
-  height: 30px;
   font-weight: 500;
   width: 240px;
   background-color: #d1cfcf;
@@ -139,5 +138,54 @@
 }
 
 .filledheart {
+  color: red;
+}
+
+.comment-body {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+  margin-bottom: 15px;
+  cursor: pointer;
+}
+.comment-parts {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+.openable p {
+  padding-top: 10px;
+}
+
+.name-comment {
+  margin-top: 10px;
+  display: grid;
+}
+
+.name-comment span:first-child {
+  font-size: 13px;
+}
+.name-comment span:nth-child(2) {
+  font-size: 12px;
+  width: 100%;
+}
+
+.pbox {
+  height: 40px;
+  width: 40px;
+  background-color: #6576ff;
+  border-radius: 50%;
+  display: flex;
+  cursor: default;
+  align-items: center;
+  color: white;
+  justify-content: center;
+  overflow: hidden;
+  margin-top: 10px;
+}
+.edit-action{
+  color: #007bff;
+}
+.delete-action{
   color: red;
 }

@@ -4,7 +4,7 @@ import styles from "./ViewBloggerBlog.module.css";
 import { Button, Popconfirm, Space, Table, Tag } from "antd";
 import { QuestionCircleOutlined } from "@ant-design/icons";
 import { useQuery, useQueryClient } from "react-query";
-import { deleteBlog, getBloggerBlog } from "../../../../constants/Api";
+import { deleteBlog, getMyBlog } from "../../../../constants/Api";
 
 const ViewBloggerBlog = () => {
   const [top, setTop] = useState("topLeft");
@@ -14,9 +14,7 @@ const ViewBloggerBlog = () => {
   const token = localStorage.getItem("token");
 
   //--------FETCH HOTEL INFO-------------
-  const { data: BlogInfo } = useQuery("blog-details", () =>
-    getBloggerBlog(token)
-  );
+  const { data: BlogInfo } = useQuery("blog-details", () => getMyBlog(token));
 
   const blogId = BlogInfo?.data[0]?.id;
   const tableData = BlogInfo?.data;

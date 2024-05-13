@@ -9,6 +9,10 @@ import { VscHeartFilled } from "react-icons/vsc";
 import { IoIosHeartDislike } from "react-icons/io";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
+import { MdDelete } from "react-icons/md";
+import { CiEdit } from "react-icons/ci";
+import { jwtDecode } from "jwt-decode";
+
 import {
   createComment,
   downVote,
@@ -36,6 +40,21 @@ const Blog = () => {
     blogId: BlogId,
   });
 
+  const token = localStorage.getItem("token");
+
+  useEffect(() => {
+    // Assuming you have the token stored in a variable called 'token'
+    const user = jwtDecode(token);
+    const userId = user.sub; // 'sub' is the standard claim for user ID
+
+    // Now you can use 'userId' in your application
+    console.log("User ID:", userId);
+  }, [token]);
+
+  // Now you can use this function to get the user ID wherever needed in your component
+  // const userId = getUserIdFromToken();
+  // console.log(userId);
+
   const handleCommentChange = (event) => {
     const { name, value } = event.target;
     setCommentData({ ...commentData, [name]: value });
@@ -59,26 +78,20 @@ const Blog = () => {
     isError: totalLikeError,
   } = useQuery("total-likes", () => getTotalLikes(BlogId));
 
-  const {
-    data: commentInfo,
-    isLoading: commentLoading,
-    isError: commentError,
-  } = useQuery("comment-info", () => getComment(BlogId));
-  console.log(commentInfo, "Cmtinfo");
+  const { data: commentInfo } = useQuery("comment-info", () =>
+    getComment(BlogId)
+  );
 
-  if (
-    recentBlogLoading ||
-    blogInfoLoading ||
-    totalLikeLoading ||
-    commentLoading
-  )
+  if (recentBlogLoading || blogInfoLoading || totalLikeLoading)
     return <div>Loading...</div>;
-  if (recentBlogError || blogInfoError || totalLikeError || commentError)
+  if (recentBlogError || blogInfoError || totalLikeError)
     return <div>Error fetching data</div>;
 
   const recentBlogData = RecentBlog?.data;
   const blog = BlogInfo?.data;
-  console.log(blog, "Blogsssssss");
+  console.log(blog);
+  const comment = commentInfo?.data;
+  console.log(comment, "comment");
 
   const likeDate = {
     blogId: blog?.id,
@@ -162,13 +175,18 @@ const Blog = () => {
   const handleCommentUpload = (event) => {
     event.preventDefault();
     setCommentActive(!commentActive);
-
+    if (commentData.content.trim() === "") {
+      toast.warn("Comment should not be empty");
+      return; // Exit the function if comment content is empty
+    }
     const token = localStorage.getItem("token");
     createComment(commentData, token)
       .then((response) => {
         if (response.status === 200 || response.status === 201) {
           const message = response.data.message;
           toast.success(message);
+
+          setCommentData({ ...commentData, content: "" });
         } else {
           const errors = response.data.errors;
           console.log(errors);
@@ -198,7 +216,7 @@ const Blog = () => {
             <p className={styles.titles}>{blog?.title}</p>
             <div className={styles.results}>
               <span>
-                <RiAdminFill /> {blog?.User ? blog?.User.fullName : "Unknown"}
+                <RiAdminFill /> {blog?.user ? blog?.user.fullName : "Unknown"}
               </span>
               <span>
                 <CiCalendarDate /> {formatDate(blog?.createdDate)}
@@ -253,7 +271,47 @@ const Blog = () => {
             <div className={styles["comment-section"]}>
               <p>Comment (0)</p>
               <hr />
-              <p>No comments found</p>
+              {comment && comment.length > 0 ? (
+                // Render comments if they exist
+                comment.map((cmt) => (
+                  <div className={styles["comment-body"]} key={cmt.id}>
+                    <div className={styles.pbox}>
+                      {cmt.user.fullName.charAt(0).toUpperCase()}
+                      {cmt.user.fullName.split(" ")[1]
+                        ? cmt.user.fullName
+                            .split(" ")[1]
+                            .charAt(0)
+                            .toUpperCase()
+                        : ""}
+                    </div>
+                    <div className={styles["comment-parts"]}>
+                      <div className={styles["name-comment"]}>
+                        <span>{cmt.user.fullName}</span>
+                        <span>{cmt.content}</span>
+                      </div>
+                      {cmt.userId === localStorage.getItem("userId") && (
+                        <div className={styles.openable}>
+                          <div className={styles["openablebox"]}>
+                            <div className={styles["edit-action"]}>
+                              <span>
+                                <CiEdit />
+                              </span>
+                            </div>
+                            <div className={styles["delete-action"]}>
+                              <span>
+                                <MdDelete />
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                ))
+              ) : (
+                // Display message if no comments
+                <p>No comments yet</p>
+              )}
               <p className={styles.commentbox}>leave a comment</p>
               <hr />
               <label htmlFor="comment" className={styles.commentlabel}>
@@ -265,6 +323,7 @@ const Blog = () => {
                 className={styles.commentTextArea}
                 onChange={handleCommentChange}
                 rows={3}
+                required
               ></textarea>
               <div className={styles["comment-btn"]}>
                 <button type="submit" onClick={handleCommentUpload}>
@@ -292,4 +351,5 @@ const Blog = () => {
     </>
   );
 };
+
 export default Blog;

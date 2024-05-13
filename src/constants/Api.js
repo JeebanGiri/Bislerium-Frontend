@@ -43,10 +43,10 @@ export const createBlog = async (newBlog, token) =>
   });
 
 // get blogger blog
-export const getBloggerBlog = async (token) =>
-  api.get("/Blog/get-blog", {
-    headers: { Authorization: `Bearer ${token}` },
-  });
+// export const getBloggerBlog = async (token) =>
+//   api.get("/Blog/get-blog", {
+//     headers: { Authorization: `Bearer ${token}` },
+//   });
 
 export const getBlogById = (blogId) => api.get(`/Blog/get-blog/${blogId}`);
 
@@ -61,11 +61,14 @@ export const deleteBloggerBlog = (blogId, token) =>
     headers: { Authorization: `Bearer ${token}` },
   });
 
-// -----GET ALL BLOG-----------------
-export const getAllBlog = async (token) =>
+// -----GET Blogger BLOG-----------------
+export const getMyBlog = async (token) =>
   api.get("/Blog/get-all-blog", {
     headers: { Authorization: `Bearer ${token}` },
   });
+
+// -----GET ALL BLOG-----------------
+export const getAllBlog = async () => api.get("/Blog/get-blog");
 
 // -----GET Recent BLOG-----------------
 export const getRecentBlog = () => api.get("/Blog/recent-blog");
@@ -113,4 +116,4 @@ export const createComment = (comment, token) =>
   });
 
 export const getComment = (blogId) =>
-  api.get(`/Comment/get-blog-comment/${blogId}`);
+  api.get(`Comment/get-blog-comment/${blogId}`);
