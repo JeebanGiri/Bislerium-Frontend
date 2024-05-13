@@ -5,6 +5,7 @@ import { BsCalendarDate } from "react-icons/bs";
 import { useQuery } from "react-query";
 import { getAllBlog, getRecentBlog } from "../../../constants/Api";
 import { formatDate } from "../../../constants/formatDate";
+import Footer from "../Footer/Footer";
 
 const Home = () => {
   const navigateTo = useNavigate();
@@ -71,7 +72,7 @@ const Home = () => {
                   </span>
                   <span className={styles["footer-side"]}>
                     <span>
-                      <FaRegEdit /> {blog.User ? blog.User.fullName : "Unknown"}
+                      <FaRegEdit /> {blog.user ? blog.user.fullName : "Unknown"}
                     </span>
                     <span>
                       <BsCalendarDate /> {formatDate(blog.createdDate)}
@@ -96,6 +97,7 @@ const Home = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 };

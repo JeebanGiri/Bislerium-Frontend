@@ -1,9 +1,9 @@
 import { useState } from "react";
 import styles from "./BlogHistory.module.css";
-import { Button, Popconfirm, Space, Table, Tag } from "antd";
+import { Button, Popconfirm, Space, Table } from "antd";
 import { QuestionCircleOutlined } from "@ant-design/icons";
 import { useQuery, useQueryClient } from "react-query";
-import { deleteBlog, getBloggerBlog } from "../../../../constants/Api";
+import { deleteBlog, getAllBlog } from "../../../../constants/Api";
 
 const BlogHistory = () => {
   const [top, setTop] = useState("topLeft");
@@ -13,9 +13,7 @@ const BlogHistory = () => {
   const token = localStorage.getItem("token");
 
   //--------FETCH HOTEL INFO-------------
-  const { data: BlogInfo } = useQuery("blog-details", () =>
-    getBloggerBlog(token)
-  );
+  const { data: BlogInfo } = useQuery("blog-details", () => getAllBlog(token));
 
   console.log(BlogInfo, "hotelinfo");
 
