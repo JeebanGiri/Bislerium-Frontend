@@ -50,7 +50,6 @@ const Home = () => {
               <div className={styles["blog-box"]}>
                 <div className={styles["img-side"]}>
                   <img src={blog.image} alt="" />
-                  {blog.image}
                   {/* {blog.image ? (
                     <img
                       src={`${BACKEND_URL}/Images/${blog.image}`} // Construct the URL properly
