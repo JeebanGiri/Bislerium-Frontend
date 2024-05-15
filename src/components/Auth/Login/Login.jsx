@@ -26,9 +26,9 @@ const Login = () => {
         if (response.status === 200) {
           const message = response.data.message;
           toast.success(message);
-
           const Jwt_token = response.data.token;
           const role = response.data.role;
+
           console.log(Jwt_token, role, "token and roles");
           localStorage.setItem("token", Jwt_token);
           localStorage.setItem("role", role);
