@@ -7,14 +7,16 @@ import { FiEye } from "react-icons/fi";
 import { LuHeartOff } from "react-icons/lu";
 import { VscHeartFilled } from "react-icons/vsc";
 import { IoIosHeartDislike } from "react-icons/io";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { MdDelete } from "react-icons/md";
 import { CiEdit } from "react-icons/ci";
 import { jwtDecode } from "jwt-decode";
+import { Popconfirm } from "antd";
 
 import {
   createComment,
+  deleteComment,
   downVote,
   getBlogById,
   getComment,
@@ -26,7 +28,7 @@ import { formatDate } from "../../../../constants/formatDate";
 import Footer from "../../Footer/Footer";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useQuery } from "react-query";
+import { useQuery, useQueryClient } from "react-query";
 
 const Blog = () => {
   const [likeActive, setLikeActive] = useState(false);
@@ -34,6 +36,9 @@ const Blog = () => {
   const [commentActive, setCommentActive] = useState(false);
   const [searchParams, setSearchParam] = useSearchParams();
   const BlogId = searchParams.get("blogId");
+  const [userId, setUserId] = useState(null);
+  const deleteIconRef = useRef(null);
+  const queryClient = useQueryClient();
 
   const [commentData, setCommentData] = useState({
     content: "",
@@ -43,11 +48,19 @@ const Blog = () => {
   const token = localStorage.getItem("token");
 
   useEffect(() => {
-    // Assuming you have the token stored in a variable called 'token'
-    const user = jwtDecode(token);
-    const userId = user.sub; // 'sub' is the standard claim for user ID
-
-    console.log("User ID:", userId);
+    if (token) {
+      // Assuming you have the token stored in a variable called 'token'
+      const user = jwtDecode(token);
+      // const decodedUserId = user.sub; // 'sub' is the standard claim for user ID
+      const decodedUserId =
+        user[
+          "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"
+        ]; // Look for NameIdentifier claim for user ID
+      setUserId(decodedUserId);
+    } else {
+      // If token doesn't exist, set userId state to null
+      setUserId(null);
+    }
   }, [token]);
 
   const handleCommentChange = (event) => {
@@ -73,8 +86,13 @@ const Blog = () => {
     isError: totalLikeError,
   } = useQuery("total-likes", () => getTotalLikes(BlogId));
 
-  const { data: commentInfo } = useQuery("comment-info", () =>
-    getComment(BlogId)
+  // const { data: commentInfo } = useQuery("comment-info", () =>
+  //   getComment(BlogId)
+  // );
+
+  const { data: commentInfo, refetch: refetchComments } = useQuery(
+    "comment-info",
+    () => getComment(BlogId)
   );
 
   if (recentBlogLoading || blogInfoLoading || totalLikeLoading)
@@ -180,8 +198,8 @@ const Blog = () => {
         if (response.status === 200 || response.status === 201) {
           const message = response.data.message;
           toast.success(message);
-
-          setCommentData({ ...commentData, content: "" });
+          setCommentData((prevData) => ({ ...prevData, content: "" }));
+          refetchComments();
         } else {
           const errors = response.data.errors;
           console.log(errors);
@@ -195,6 +213,30 @@ const Blog = () => {
       .catch((error) => {
         const errorMsg =
           error.response.data.message || error.response.data.errors;
+        if (Array.isArray(errorMsg)) {
+          errorMsg.forEach((err) => toast.error(err));
+        } else if (errorMsg) {
+          toast.error(errorMsg);
+        }
+      });
+  };
+
+  const handleDeleteComment = (cmtId) => {
+    // event.preventDefault();
+    const token = localStorage.getItem("token");
+    deleteComment(cmtId, token)
+      .then((response) => {
+        const message = response.data;
+        toast.success(message);
+
+        // Remove the deleted comment from the comments array
+        queryClient.setQueryData("comment-info", (oldData) => ({
+          data: oldData.data.filter((cmt) => cmt.id !== cmtId),
+        }));
+      })
+      .catch((error) => {
+        console.log(error, "err get to delete coment");
+        const errorMsg = error.response.data.message || error.response.data;
         if (Array.isArray(errorMsg)) {
           errorMsg.forEach((err) => toast.error(err));
         } else if (errorMsg) {
@@ -268,7 +310,7 @@ const Blog = () => {
               <hr />
               {comment && comment.length > 0 ? (
                 // Render comments if they exist
-                comment.map((cmt) => (
+                comment.map((cmt, index) => (
                   <div className={styles["comment-body"]} key={cmt.id}>
                     <div className={styles.pbox}>
                       {cmt.user.fullName.charAt(0).toUpperCase()}
@@ -284,7 +326,7 @@ const Blog = () => {
                         <span>{cmt.user.fullName}</span>
                         <span>{cmt.content}</span>
                       </div>
-                      {cmt.userId === localStorage.getItem("userId") && (
+                      {blog?.authorId === userId && (
                         <div className={styles.openable}>
                           <div className={styles["openablebox"]}>
                             <div className={styles["edit-action"]}>
@@ -293,8 +335,19 @@ const Blog = () => {
                               </span>
                             </div>
                             <div className={styles["delete-action"]}>
-                              <span>
-                                <MdDelete />
+                              <span ref={deleteIconRef}>
+                                <Popconfirm
+                                  title="Delete comment"
+                                  description="Are you sure to delete this comment?"
+                                  okText="Yes"
+                                  cancelText="No"
+                                  onConfirm={() => handleDeleteComment(cmt.id)}
+                                  getPopupContainer={() =>
+                                    deleteIconRef.current
+                                  }
+                                >
+                                  <MdDelete />
+                                </Popconfirm>
                               </span>
                             </div>
                           </div>

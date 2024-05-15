@@ -117,3 +117,9 @@ export const createComment = (comment, token) =>
 
 export const getComment = (blogId) =>
   api.get(`Comment/get-blog-comment/${blogId}`);
+
+// ----------DELETE THE Comment ----------------
+export const deleteComment = (cmtId, token) =>
+  api.delete(`/Comment/delete-comment/${cmtId}`, {
+    headers: { Authorization: `Bearer ${token}` },
+  });

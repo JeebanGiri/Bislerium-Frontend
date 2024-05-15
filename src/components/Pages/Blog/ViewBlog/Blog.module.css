@@ -116,6 +116,8 @@
 .commentTextArea {
   border: 1px solid cornflowerblue;
   border-color: 1px solid cornflowerblue;
+  padding-left: 5px;
+  font-family: "Roboto";
 }
 .commentTextArea::focus {
   border: 2px solid cornflowerblue;
@@ -183,9 +185,9 @@
   overflow: hidden;
   margin-top: 10px;
 }
-.edit-action{
+.edit-action {
   color: #007bff;
 }
-.delete-action{
+.delete-action {
   color: red;
 }
