@@ -1,6 +1,69 @@
-.container .title {
+.adminhome {
+  width: 100%;
+}
+.adminhome .title {
   font-size: 24px;
   font-weight: 400;
   color: gray;
   font-family: "Roboto";
+}
+
+.container {
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 230px;
+  height: 120px;
+  font-family: "Roboto";
+  font-weight: 400;
+  display: flex;
+  gap: 20px;
+}
+
+.AdminDashboard {
+  gap: 20px;
+  display: flex;
+}
+
+.tableHeading {
+  height: 20px;
+  font-size: bold;
+}
+.spacedTable {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.spacedTable th,
+.spacedTable td {
+  padding: 10px;
+  border: 1px solid black;
+}
+.gap {
+  margin-top: 10px;
+}
+.bloggerrow th {
+  font-weight: 400;
+}
+.TopBlogger {
+  font-family: "Roboto";
+  font-size: medium;
+}
+.content {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 15px;
+}
+.icon {
+  font-size: 20px;
+}
+.h2 {
+  margin-bottom: 15px;
+}
+
+.board {
+  display: grid;
 }
