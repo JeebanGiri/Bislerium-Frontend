@@ -123,3 +123,9 @@ export const deleteComment = (cmtId, token) =>
   api.delete(`/Comment/delete-comment/${cmtId}`, {
     headers: { Authorization: `Bearer ${token}` },
   });
+
+// ----------GET Dashboard Details ---------
+export const getDashboardDetails = (token) =>
+  api.get("/Dashboard/dashboard/stats", {
+    headers: { Authorization: `Bearer ${token}` },
+  });

@@ -44,7 +44,7 @@ const AddAdmin = () => {
           const message = response.data;
           toast.success(message);
           setTimeout(() => {
-            navigateTo("/login");
+            // navigateTo("/login");
           }, 2000);
         } else {
           const errors = response.data.errors;
