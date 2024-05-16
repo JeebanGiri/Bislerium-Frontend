@@ -86,10 +86,6 @@ const Blog = () => {
     isError: totalLikeError,
   } = useQuery("total-likes", () => getTotalLikes(BlogId));
 
-  // const { data: commentInfo } = useQuery("comment-info", () =>
-  //   getComment(BlogId)
-  // );
-
   const { data: commentInfo, refetch: refetchComments } = useQuery(
     "comment-info",
     () => getComment(BlogId)
@@ -235,7 +231,6 @@ const Blog = () => {
         }));
       })
       .catch((error) => {
-        console.log(error, "err get to delete coment");
         const errorMsg = error.response.data.message || error.response.data;
         if (Array.isArray(errorMsg)) {
           errorMsg.forEach((err) => toast.error(err));
@@ -310,7 +305,7 @@ const Blog = () => {
               <hr />
               {comment && comment.length > 0 ? (
                 // Render comments if they exist
-                comment.map((cmt, index) => (
+                comment.map((cmt) => (
                   <div className={styles["comment-body"]} key={cmt.id}>
                     <div className={styles.pbox}>
                       {cmt.user.fullName.charAt(0).toUpperCase()}
@@ -326,7 +321,7 @@ const Blog = () => {
                         <span>{cmt.user.fullName}</span>
                         <span>{cmt.content}</span>
                       </div>
-                      {blog?.authorId === userId && (
+                      {cmt?.authorId === userId && (
                         <div className={styles.openable}>
                           <div className={styles["openablebox"]}>
                             <div className={styles["edit-action"]}>
