@@ -85,11 +85,10 @@ export const deleteSubAdmin = (adminId, token) =>
     headers: { Authorization: `Bearer ${token}` },
   });
 
-export const saveNotificationToken = (data, token) => {
-  return api.post("/firebase/save-token", data, {
+export const saveNotificationToken = (data, token) =>
+  api.post("/Firebase/save-token", data, {
     headers: { Authorization: `Bearer ${token}` },
   });
-};
 
 export const upVote = (blogLike, token) =>
   api.post("/BlogLike/upvote", blogLike, {
@@ -121,6 +120,11 @@ export const getComment = (blogId) =>
 // ----------DELETE THE Comment ----------------
 export const deleteComment = (cmtId, token) =>
   api.delete(`/Comment/delete-comment/${cmtId}`, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+
+export const updateComment = (comment, token) =>
+  api.post("/Comment/update-comment", comment, {
     headers: { Authorization: `Bearer ${token}` },
   });
 

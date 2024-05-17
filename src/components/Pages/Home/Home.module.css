@@ -54,7 +54,6 @@
 .box-frame .blog-box {
   display: flex;
   padding: 10px;
-  /* width: 600px; */
   width: 900px;
 }
 .blog-box .img-side img {
@@ -66,6 +65,8 @@
   display: grid;
   border: 1px solid #fbf3f3;
   padding-left: 10px;
+  width: 750px;
+  height: 150px;
 }
 .content-side .blogtitle {
   font-weight: 500;
@@ -152,4 +153,12 @@
   margin-left: 20px;
   font-family: "Roboto";
   text-align: justify;
+}
+
+.content-side p {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

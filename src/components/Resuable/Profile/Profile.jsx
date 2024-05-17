@@ -29,9 +29,7 @@ const Profile = () => {
     setTimeout(() => {
       toast.warn("Logout Successfully!");
       // Reload the page after the message is displayed
-      setTimeout(() => {
-        window.location.reload();
-      }, 2000); // Adjust the time according to your preference
+      window.location.reload();
     }, 0);
   };
   const { data } = useQuery("get-profile", () => userProfile(token));

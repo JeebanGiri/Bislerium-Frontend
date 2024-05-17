@@ -6,6 +6,7 @@ import { useQuery } from "react-query";
 import { getAllBlog, getRecentBlog } from "../../../constants/Api";
 import { formatDate } from "../../../constants/formatDate";
 import Footer from "../Footer/Footer";
+import { Backend_Image } from "../../../constants/constant";
 
 const Home = () => {
   const navigateTo = useNavigate();
@@ -49,22 +50,22 @@ const Home = () => {
             <div key={blog.id} className={styles["box-frame"]}>
               <div className={styles["blog-box"]}>
                 <div className={styles["img-side"]}>
-                  <img src={blog.image} alt="" />
-                  {/* {blog.image ? (
+                  {blog.image ? (
                     <img
-                      src={`${BACKEND_URL}/Images/${blog.image}`} // Construct the URL properly
+                      src={`${Backend_Image}/Images/${blog?.image}`}
                       alt="Blog Image"
                     />
                   ) : (
                     <p>No image available</p>
-                  )} */}
+                  )}
                 </div>
+
                 <div className={styles["content-side"]}>
                   <div className={styles.blogtitle}>
                     <p>{blog.title}</p>
                   </div>
                   <span className={styles.blogdetails}>
-                    <p>{blog.content}</p>
+                    <p className={styles.overflowEllipsis}>{blog.content}</p>
                     <button onClick={(e) => goToBlog(e, blog.id)}>
                       Continue Reading
                     </button>

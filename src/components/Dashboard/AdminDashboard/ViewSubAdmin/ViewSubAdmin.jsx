@@ -10,19 +10,14 @@ const ViewSubAdmin = () => {
   const token = localStorage.getItem("token");
 
   //--------FETCH Blogger INFO-------------
-  const { data: AdminInfo } = useQuery("admin-details", () =>
-    getSubAdmin(token)
+  const { data: AdminInfo, refetch: refetchSubAdmin } = useQuery(
+    "admin-details",
+    () => getSubAdmin(token)
   );
 
-  console.log(AdminInfo, "admininfo");
-  console.log(AdminInfo, "Admins");
-
-  const blogId = AdminInfo?.data[0]?.id;
-  console.log(blogId, "adminId");
+  // const blogId = AdminInfo?.data[0]?.id;
 
   const tableData = AdminInfo?.data;
-  console.log(tableData, "tables");
-
   const handleDeleteAdmin = async (blogId) => {
     try {
       await deleteSubAdmin(blogId, token);
