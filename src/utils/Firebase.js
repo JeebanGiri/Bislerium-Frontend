@@ -1,11 +1,12 @@
 import { initializeApp } from "firebase/app";
 import { getMessaging, getToken } from "firebase/messaging";
 import { saveNotificationToken } from "../constants/Api";
+import { useState } from "react";
 
 //--------GET TOKEN FROM LOCAL STORAGE---------
 const jwt = localStorage.getItem("token");
 
-// -------------Initialize Firebase----------------     
+// -------------Initialize Firebase----------------
 const firebaseConfig = {
   apiKey: "AIzaSyA-DOii6Zph2AbSjMyRWlFYUtedO9ekKrM",
   authDomain: "bislerium-blogging-system.firebaseapp.com",
@@ -27,7 +28,7 @@ const setupNotifications = async (message) => {
       // Get the FCM token
       console.log(message, "Message");
       const token = await getToken(messaging);
-      const data = { notification_token: token, device_type: "WEB" };
+      const data = { Token: token, device_type: "WEB" };
       saveNotificationToken(data, jwt)
         .then((res) => console.log(res.message))
         .catch((err) => console.log(err.response));

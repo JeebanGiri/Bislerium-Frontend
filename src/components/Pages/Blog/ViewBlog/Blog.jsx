@@ -13,6 +13,8 @@ import { MdDelete } from "react-icons/md";
 import { CiEdit } from "react-icons/ci";
 import { jwtDecode } from "jwt-decode";
 import { Popconfirm } from "antd";
+import { Modal } from "antd";
+import { Flex, Input } from "antd";
 
 import {
   createComment,
@@ -23,12 +25,16 @@ import {
   getRecentBlog,
   getTotalLikes,
   upVote,
+  updateComment,
 } from "../../../../constants/Api";
 import { formatDate } from "../../../../constants/formatDate";
 import Footer from "../../Footer/Footer";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useQuery, useQueryClient } from "react-query";
+import { Backend_Image } from "../../../../constants/constant";
+
+const { TextArea } = Input;
 
 const Blog = () => {
   const [likeActive, setLikeActive] = useState(false);
@@ -39,11 +45,38 @@ const Blog = () => {
   const [userId, setUserId] = useState(null);
   const deleteIconRef = useRef(null);
   const queryClient = useQueryClient();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [editingCommentId, setEditingCommentId] = useState("");
 
   const [commentData, setCommentData] = useState({
     content: "",
     blogId: BlogId,
   });
+
+  const [commentDatas, setCommentDatas] = useState({
+    content: "",
+    Id: "",
+  });
+
+  const showModal = (cmtId, content) => {
+    setEditingCommentId(cmtId);
+    setCommentDatas({ content: content, Id: cmtId });
+    setIsModalOpen(true);
+  };
+
+  const handleOk = (event) => {
+    setIsModalOpen(false);
+    handleUpdateComment(event);
+  };
+
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleCommentChanges = (event) => {
+    const { name, value } = event.target;
+    setCommentDatas({ ...commentDatas, [name]: value });
+  };
 
   const token = localStorage.getItem("token");
 
@@ -115,6 +148,11 @@ const Blog = () => {
   const handleLikeUpload = () => {
     setLikeActive(!likeActive);
     const token = localStorage.getItem("token");
+    if (!token) {
+      // User is not logged in, show error message
+      toast.error("Please log in first to like the post");
+      return;
+    }
     upVote(likeDate, token)
       .then((response) => {
         if (response.status === 200 || response.status === 201) {
@@ -127,6 +165,9 @@ const Blog = () => {
             toast.success(message);
           }
         } else {
+          if (response.status === 401) {
+            toast.warn("Please Login before to Like");
+          }
           const errors = response.data.errors;
           console.log(errors);
           Object.values(errors).forEach((errorArr) => {
@@ -150,6 +191,11 @@ const Blog = () => {
   const handleDisLikeUpload = () => {
     setDislikeActive(!dislikeActive);
     const token = localStorage.getItem("token");
+    if (!token) {
+      // User is not logged in, show error message
+      toast.error("Please log in first to Dis like the post");
+      return;
+    }
     downVote(disLikeDate, token)
       .then((response) => {
         if (response.status === 200 || response.status === 201) {
@@ -161,6 +207,9 @@ const Blog = () => {
             toast.success(message);
           }
         } else {
+          if (errors === 401) {
+            toast.warn("Please Login before to Like");
+          }
           const errors = response.data.errors;
           console.log(errors);
           Object.values(errors).forEach((errorArr) => {
@@ -216,7 +265,6 @@ const Blog = () => {
         }
       });
   };
-
   const handleDeleteComment = (cmtId) => {
     // event.preventDefault();
     const token = localStorage.getItem("token");
@@ -232,6 +280,44 @@ const Blog = () => {
       })
       .catch((error) => {
         const errorMsg = error.response.data.message || error.response.data;
+        if (Array.isArray(errorMsg)) {
+          errorMsg.forEach((err) => toast.error(err));
+        } else if (errorMsg) {
+          toast.error(errorMsg);
+        }
+      });
+  };
+
+  const handleUpdateComment = (event) => {
+    event.preventDefault();
+
+    if (commentDatas.content.trim() === "") {
+      toast.warn("Comment should not be empty");
+      return; // Exit the function if comment content is empty
+    }
+    const token = localStorage.getItem("token");
+    updateComment(commentDatas, token)
+      .then((response) => {
+        // if (response.status === 200 || response.status === 201) {
+        const message = response.data.message;
+        toast.success(message);
+        console.log(response);
+        // setCommentDatas((prevData) => ({ ...prevData, content: "" }));
+        setCommentDatas({ ...commentDatas, content: "" });
+        refetchComments();
+        // } else {
+        const errors = response.data.errors;
+        console.log(errors);
+        Object.values(errors).forEach((errorArr) => {
+          errorArr.forEach((errMsg) => {
+            toast.error(errMsg);
+          });
+        });
+        // }
+      })
+      .catch((error) => {
+        const errorMsg =
+          error.response.data.message || error.response.data.errors;
         if (Array.isArray(errorMsg)) {
           errorMsg.forEach((err) => toast.error(err));
         } else if (errorMsg) {
@@ -258,7 +344,14 @@ const Blog = () => {
               </span>
             </div>
             <div className={styles.blogimg}>
-              <img src={blog?.images} alt="Blog" />
+              {blog.image ? (
+                <img
+                  src={`${Backend_Image}/Images/${blog?.image}`}
+                  alt="Blog Image"
+                />
+              ) : (
+                <p>No image available</p>
+              )}
             </div>
             <div className={styles.voting}>
               <p className={styles["voting-content"]}>
@@ -326,7 +419,32 @@ const Blog = () => {
                           <div className={styles["openablebox"]}>
                             <div className={styles["edit-action"]}>
                               <span>
-                                <CiEdit />
+                                <span
+                                  onClick={() => showModal(cmt.id, cmt.content)}
+                                >
+                                  <CiEdit name="cmtId" />
+                                </span>
+                                <Modal
+                                  title="Update Comment"
+                                  open={isModalOpen}
+                                  onOk={handleOk}
+                                  onCancel={handleCancel}
+                                  value={cmt.content}
+                                >
+                                  <Flex vertical gap={32}>
+                                    <TextArea
+                                      showCount
+                                      maxLength={100}
+                                      name="content"
+                                      onChange={handleCommentChanges}
+                                      placeholder="leave your comment"
+                                      style={{
+                                        height: 120,
+                                        resize: "none",
+                                      }}
+                                    />
+                                  </Flex>
+                                </Modal>
                               </span>
                             </div>
                             <div className={styles["delete-action"]}>
