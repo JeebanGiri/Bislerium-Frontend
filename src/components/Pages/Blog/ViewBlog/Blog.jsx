@@ -117,6 +117,7 @@ const Blog = () => {
     data: totalLike,
     isLoading: totalLikeLoading,
     isError: totalLikeError,
+    refetch: refetchLikes,
   } = useQuery("total-likes", () => getTotalLikes(BlogId));
 
   const { data: commentInfo, refetch: refetchComments } = useQuery(
@@ -131,9 +132,7 @@ const Blog = () => {
 
   const recentBlogData = RecentBlog?.data;
   const blog = BlogInfo?.data;
-  console.log(blog);
   const comment = commentInfo?.data;
-  console.log(comment, "comment");
 
   const likeDate = {
     blogId: blog?.id,
@@ -144,7 +143,6 @@ const Blog = () => {
     blogId: blog?.id,
     reactionType: false,
   };
-
   const handleLikeUpload = () => {
     setLikeActive(!likeActive);
     const token = localStorage.getItem("token");
@@ -163,6 +161,7 @@ const Blog = () => {
             toast.warning(message);
           } else {
             toast.success(message);
+            refetchLikes();
           }
         } else {
           if (response.status === 401) {

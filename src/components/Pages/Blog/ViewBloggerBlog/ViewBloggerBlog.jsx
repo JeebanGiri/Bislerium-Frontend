@@ -5,6 +5,7 @@ import { Button, Popconfirm, Space, Table, Tag } from "antd";
 import { QuestionCircleOutlined } from "@ant-design/icons";
 import { useQuery, useQueryClient } from "react-query";
 import { deleteBlog, getMyBlog } from "../../../../constants/Api";
+import { Backend_Image } from "../../../../constants/constant";
 
 const ViewBloggerBlog = () => {
   const [top, setTop] = useState("topLeft");
@@ -18,6 +19,7 @@ const ViewBloggerBlog = () => {
 
   const blogId = BlogInfo?.data[0]?.id;
   const tableData = BlogInfo?.data;
+  console.log(tableData);
 
   const handleDeleteBlog = async (blogId) => {
     try {
@@ -61,19 +63,16 @@ const ViewBloggerBlog = () => {
     {
       title: "Image",
       key: "images",
-      dataIndex: "images",
-      // render: (images) => (
-      //   <>
-      //     {images.map((image, index) => (
-      //       <img
-      //         key={index}
-      //         src={`${BACKEND_URL}/static/rooms/${image}`}
-      //         alt="Service"
-      //         style={{ width: "50px", height: "50px", marginRight: "5px" }}
-      //       />
-      //     ))}
-      //   </>
-      // ),
+      dataIndex: "image",
+      render: (images) => (
+        <>
+          <img
+            src={`${Backend_Image}/Images/${images}`}
+            alt="Service"
+            style={{ width: "50px", height: "50px", marginRight: "5px" }}
+          />
+        </>
+      ),
     },
     {
       title: "Action",

@@ -49,16 +49,6 @@ const CreateBlog = () => {
   };
 
   const handleCreate = () => {
-    // const data = new FormData();
-    // Object.keys(formData).forEach((key) => {
-    //   const value = formData[key];
-    //   if (Array.isArray(value)) {
-    //     value.forEach((file) => data.append(key, file));
-    //   } else {
-    //     data.append(key, value);
-    //   }
-    // });
-
     const data = new FormData();
 
     // Append title and content
@@ -81,7 +71,11 @@ const CreateBlog = () => {
     console.log(formData.imageFile, "images seleted");
 
     const token = localStorage.getItem("token");
-
+    if (!token) {
+      toast.warn("Please Login First");
+      navigateTo("/");
+      return;
+    }
     createBlog(data, token)
       .then((response) => {
         if (response.status === 200) {
