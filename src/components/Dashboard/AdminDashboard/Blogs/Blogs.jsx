@@ -4,6 +4,7 @@ import { Button, Popconfirm, Space, Table } from "antd";
 import { QuestionCircleOutlined } from "@ant-design/icons";
 import { useQuery, useQueryClient } from "react-query";
 import { deleteBloggerBlog, getAllBlog } from "../../../../constants/Api";
+import { Backend_Image } from "../../../../constants/constant";
 
 const Blogs = () => {
   const date = new Date();
@@ -85,19 +86,16 @@ const Blogs = () => {
     {
       title: "Image",
       key: "images",
-      dataIndex: "images",
-      // render: (images) => (
-      //   <>
-      //     {images.map((image, index) => (
-      //       <img
-      //         key={index}
-      //         src={`${BACKEND_URL}/static/rooms/${image}`}
-      //         alt="Service"
-      //         style={{ width: "50px", height: "50px", marginRight: "5px" }}
-      //       />
-      //     ))}
-      //   </>
-      // ),
+      dataIndex: "image",
+      render: (images) => (
+        <>
+          <img
+            src={`${Backend_Image}/Images/${images}`}
+            alt="Service"
+            style={{ width: "100px", height: "60px", marginRight: "5px" }}
+          />
+        </>
+      ),
     },
     {
       title: "Action",

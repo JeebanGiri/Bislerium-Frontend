@@ -50,6 +50,9 @@ export const createBlog = async (newBlog, token) =>
 
 export const getBlogById = (blogId) => api.get(`/Blog/get-blog/${blogId}`);
 
+// get liked blog
+export const getLikedBlog = (blogId) => api.get(`/BlogLike//${blogId}`);
+
 // ----------DELETE THE Blog ----------------
 export const deleteBlog = (blogId, token) =>
   api.delete(`/Blog/delete-blog/${blogId}`, {
